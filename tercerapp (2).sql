@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.7.4
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-05-2018 a las 17:34:33
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.4
+-- Tiempo de generación: 15-05-2018 a las 21:58:23
+-- Versión del servidor: 10.1.26-MariaDB
+-- Versión de PHP: 7.1.9
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -59,6 +59,23 @@ CREATE TABLE `formulariogeneral` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `formulariogerantologico`
+--
+
+CREATE TABLE `formulariogerantologico` (
+  `disUso` text NOT NULL,
+  `disMUso` text NOT NULL,
+  `frec` int(11) NOT NULL,
+  `AUso` text NOT NULL,
+  `usoFav` text NOT NULL,
+  `duke` text NOT NULL,
+  `comFav` text NOT NULL,
+  `Impr` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `formulariomovilidad`
 --
 
@@ -79,22 +96,40 @@ CREATE TABLE `formulariomovilidad` (
 
 CREATE TABLE `formularionutricion` (
   `id` int(11) NOT NULL,
-  `creacion` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `lastUpdated` timestamp NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
-  `nombre` varchar(50) NOT NULL,
-  `edad` int(11) NOT NULL,
-  `peso` double NOT NULL,
+  `creacion` date DEFAULT NULL,
+  `lastUpdated` date DEFAULT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `edad` int(11) DEFAULT NULL,
+  `peso` double DEFAULT NULL,
+  `intPeso` varchar(50) DEFAULT NULL,
   `electrolitos` double DEFAULT NULL,
+  `intElectrolitos` varchar(50) DEFAULT NULL,
   `albumina` double DEFAULT NULL,
+  `intAlbumina` varchar(50) DEFAULT NULL,
   `IMC` double DEFAULT NULL,
+  `intIMC` varchar(50) DEFAULT NULL,
   `diametroBrazo` double DEFAULT NULL,
+  `intDiametroBrazo` varchar(50) DEFAULT NULL,
   `diametroPierna` double DEFAULT NULL,
+  `intDiametroPierna` varchar(50) DEFAULT NULL,
   `diametroAbdomen` double DEFAULT NULL,
+  `intDiametroAbdomen` varchar(50) DEFAULT NULL,
   `presion` double DEFAULT NULL,
+  `intPresion` varchar(50) DEFAULT NULL,
   `BH` double DEFAULT NULL,
+  `intBH` varchar(50) DEFAULT NULL,
   `glucosa` double DEFAULT NULL,
-  `lipidos` double DEFAULT NULL
+  `intGlucosa` varchar(50) DEFAULT NULL,
+  `lipidos` double DEFAULT NULL,
+  `intLipidos` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `formularionutricion`
+--
+
+INSERT INTO `formularionutricion` (`id`, `creacion`, `lastUpdated`, `nombre`, `edad`, `peso`, `intPeso`, `electrolitos`, `intElectrolitos`, `albumina`, `intAlbumina`, `IMC`, `intIMC`, `diametroBrazo`, `intDiametroBrazo`, `diametroPierna`, `intDiametroPierna`, `diametroAbdomen`, `intDiametroAbdomen`, `presion`, `intPresion`, `BH`, `intBH`, `glucosa`, `intGlucosa`, `lipidos`, `intLipidos`) VALUES
+(1, '2018-05-15', '2018-05-15', NULL, NULL, 50.2, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación');
 
 -- --------------------------------------------------------
 
@@ -171,7 +206,8 @@ INSERT INTO `pacientes` (`id`, `creacion`, `LastUpdated`, `telefono`, `nombre`, 
 (5, NULL, NULL, NULL, 'Juan', 'Perez', 'Martinez', 'pepe@mail.com', NULL, NULL, NULL, 'Preparatoria', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (9, NULL, NULL, NULL, 'Enrique', 'Navarro', 'Torres', 'e.navarro@mail.com', NULL, '85', 1, 'Posgrado', NULL, 'Casado', 'B+', 'Hipertension', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (10, '2018-05-11', '2018-05-11', '01234567', 'Alberto', 'Juarez', 'Lopez', 'alberto@mail.com', 'Casa de Beto', '56', 0, 'Preparatoria', NULL, 'Divorciado', 'C-', 'VIH', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, '2018-05-11', '2018-05-11', '0000000', 'Adrian', 'Lopez', 'Tsuru', 'adrian@mail.com', 'Casa Mike', '75', 1, 'Licenciatura', 'ISSTE', 'Casado', 'A+', 'Hipertension', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+(11, '2018-05-11', '2018-05-11', '0000000', 'Adrian', 'Lopez', 'Tsuru', 'adrian@mail.com', 'Casa Mike', '75', 1, 'Licenciatura', 'ISSTE', 'Casado', 'A+', 'Hipertension', 1, NULL, NULL, NULL, NULL, NULL, NULL),
+(12, '2018-05-15', '2018-05-15', '548', 'a', 'a', 'a', '', 'aa', '80', 1, '1', 'a', 'Casado', 'a', 'a', 1, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -201,7 +237,7 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id`, `creacion`, `lastUpdated`, `activo`, `tipo`, `nombre`, `apellidoPaterno`, `apellidoMaterno`, `domicilio`, `pass`, `telefono`, `estadoCivil`, `email`, `edad`) VALUES
-(1, '2018-05-01', '2018-05-10', 1, 'Administrador', 'Ken', '', '', 'Calle', '1234', '55672438', 'casado', 'hola@gmail.com', '19'),
+(1, '2018-05-01', '2018-05-15', 1, 'Usuario', 'Ken', '', '', 'Calle', '1234', '55672438', 'casado', 'hola@gmail.com', '19'),
 (2, NULL, '2018-05-10', 0, 'user', 'Adrian', 'Juarez', 'Sevilla', 'Fuego', 'AlfredoSevillaJuarez', NULL, NULL, 'Alfredo.JuarezS@email.com', NULL),
 (3, '2018-05-04', '2018-05-10', 1, 'user', 'Pepe', 'Baltazar', 'Ramses', 'Calle del puente', 'JuanitoRamsesBaltazar', NULL, NULL, 'Juanito.BaltazarR@email.com', NULL),
 (7, '2018-05-09', '2018-05-09', 1, 'user', 'Juan', 'De la Barrera', 'Gonzalez', NULL, 'JuanGonzalezDe la Barrera', NULL, NULL, 'Juan.De la BarreraG@email.com', NULL),
@@ -280,7 +316,7 @@ ALTER TABLE `formulariomovilidad`
 -- AUTO_INCREMENT de la tabla `formularionutricion`
 --
 ALTER TABLE `formularionutricion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de la tabla `formularioss`
@@ -298,7 +334,7 @@ ALTER TABLE `graficas`
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`

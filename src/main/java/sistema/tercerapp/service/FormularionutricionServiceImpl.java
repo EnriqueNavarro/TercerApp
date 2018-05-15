@@ -37,7 +37,6 @@ public class FormularionutricionServiceImpl implements FormularionutricionServic
     public void updateFormularionutricion(Formularionutricion fm) {
     Formularionutricion entity = dao.findById(fm.getId());
         if(entity!=null){
-            entity.setNombre(fm.getNombre()); //actualizar formulario
 
         }          
     }

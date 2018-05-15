@@ -18,12 +18,13 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Arpi
+ * @author Kenyiro
  */
 @Entity
 @Table(name = "formularionutricion")
@@ -33,8 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Formularionutricion.findById", query = "SELECT f FROM Formularionutricion f WHERE f.id = :id")
     , @NamedQuery(name = "Formularionutricion.findByCreacion", query = "SELECT f FROM Formularionutricion f WHERE f.creacion = :creacion")
     , @NamedQuery(name = "Formularionutricion.findByLastUpdated", query = "SELECT f FROM Formularionutricion f WHERE f.lastUpdated = :lastUpdated")
-    , @NamedQuery(name = "Formularionutricion.findByNombre", query = "SELECT f FROM Formularionutricion f WHERE f.nombre = :nombre")
-    , @NamedQuery(name = "Formularionutricion.findByEdad", query = "SELECT f FROM Formularionutricion f WHERE f.edad = :edad")
     , @NamedQuery(name = "Formularionutricion.findByPeso", query = "SELECT f FROM Formularionutricion f WHERE f.peso = :peso")
     , @NamedQuery(name = "Formularionutricion.findByIntPeso", query = "SELECT f FROM Formularionutricion f WHERE f.intPeso = :intPeso")
     , @NamedQuery(name = "Formularionutricion.findByElectrolitos", query = "SELECT f FROM Formularionutricion f WHERE f.electrolitos = :electrolitos")
@@ -56,7 +55,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Formularionutricion.findByGlucosa", query = "SELECT f FROM Formularionutricion f WHERE f.glucosa = :glucosa")
     , @NamedQuery(name = "Formularionutricion.findByIntGlucosa", query = "SELECT f FROM Formularionutricion f WHERE f.intGlucosa = :intGlucosa")
     , @NamedQuery(name = "Formularionutricion.findByLipidos", query = "SELECT f FROM Formularionutricion f WHERE f.lipidos = :lipidos")
-    , @NamedQuery(name = "Formularionutricion.findByIntLipidos", query = "SELECT f FROM Formularionutricion f WHERE f.intLipidos = :intLipidos")})
+    , @NamedQuery(name = "Formularionutricion.findByIntLipidos", query = "SELECT f FROM Formularionutricion f WHERE f.intLipidos = :intLipidos")
+    , @NamedQuery(name = "Formularionutricion.findByPacienteId", query = "SELECT f FROM Formularionutricion f WHERE f.pacienteId = :pacienteId")})
 public class Formularionutricion implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -71,11 +71,6 @@ public class Formularionutricion implements Serializable {
     @Column(name = "lastUpdated")
     @Temporal(TemporalType.DATE)
     private Date lastUpdated;
-    @Size(max = 50)
-    @Column(name = "nombre")
-    private String nombre;
-    @Column(name = "edad")
-    private Integer edad;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "peso")
     private Double peso;
@@ -132,12 +127,21 @@ public class Formularionutricion implements Serializable {
     @Size(max = 50)
     @Column(name = "intLipidos")
     private String intLipidos;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "paciente_id")
+    private int pacienteId;
 
     public Formularionutricion() {
     }
 
     public Formularionutricion(Integer id) {
         this.id = id;
+    }
+
+    public Formularionutricion(Integer id, int pacienteId) {
+        this.id = id;
+        this.pacienteId = pacienteId;
     }
 
     public Integer getId() {
@@ -162,22 +166,6 @@ public class Formularionutricion implements Serializable {
 
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public Integer getEdad() {
-        return edad;
-    }
-
-    public void setEdad(Integer edad) {
-        this.edad = edad;
     }
 
     public Double getPeso() {
@@ -354,6 +342,14 @@ public class Formularionutricion implements Serializable {
 
     public void setIntLipidos(String intLipidos) {
         this.intLipidos = intLipidos;
+    }
+
+    public int getPacienteId() {
+        return pacienteId;
+    }
+
+    public void setPacienteId(int pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
     @Override

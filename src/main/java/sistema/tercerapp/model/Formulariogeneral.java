@@ -34,14 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Formulariogeneral.findById", query = "SELECT f FROM Formulariogeneral f WHERE f.id = :id")
     , @NamedQuery(name = "Formulariogeneral.findByCreacion", query = "SELECT f FROM Formulariogeneral f WHERE f.creacion = :creacion")
     , @NamedQuery(name = "Formulariogeneral.findByLastUpdated", query = "SELECT f FROM Formulariogeneral f WHERE f.lastUpdated = :lastUpdated")
-    , @NamedQuery(name = "Formulariogeneral.findByNombre", query = "SELECT f FROM Formulariogeneral f WHERE f.nombre = :nombre")
-    , @NamedQuery(name = "Formulariogeneral.findByEdad", query = "SELECT f FROM Formulariogeneral f WHERE f.edad = :edad")
-    , @NamedQuery(name = "Formulariogeneral.findByEscolaridad", query = "SELECT f FROM Formulariogeneral f WHERE f.escolaridad = :escolaridad")
-    , @NamedQuery(name = "Formulariogeneral.findByEstadoCivil", query = "SELECT f FROM Formulariogeneral f WHERE f.estadoCivil = :estadoCivil")
-    , @NamedQuery(name = "Formulariogeneral.findByAfiliacion", query = "SELECT f FROM Formulariogeneral f WHERE f.afiliacion = :afiliacion")
-    , @NamedQuery(name = "Formulariogeneral.findByPadecimientos", query = "SELECT f FROM Formulariogeneral f WHERE f.padecimientos = :padecimientos")
-    , @NamedQuery(name = "Formulariogeneral.findByCohabitacion", query = "SELECT f FROM Formulariogeneral f WHERE f.cohabitacion = :cohabitacion")
-    , @NamedQuery(name = "Formulariogeneral.findByEmail", query = "SELECT f FROM Formulariogeneral f WHERE f.email = :email")
     , @NamedQuery(name = "Formulariogeneral.findByAmai", query = "SELECT f FROM Formulariogeneral f WHERE f.amai = :amai")
     , @NamedQuery(name = "Formulariogeneral.findByKartz", query = "SELECT f FROM Formulariogeneral f WHERE f.kartz = :kartz")
     , @NamedQuery(name = "Formulariogeneral.findByMental", query = "SELECT f FROM Formulariogeneral f WHERE f.mental = :mental")
@@ -72,46 +64,6 @@ public class Formulariogeneral implements Serializable {
     @Column(name = "lastUpdated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "nombre")
-    private String nombre;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "edad")
-    private String edad;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "escolaridad")
-    private String escolaridad;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "estadoCivil")
-    private String estadoCivil;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "afiliacion")
-    private String afiliacion;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "padecimientos")
-    private String padecimientos;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "cohabitacion")
-    private boolean cohabitacion;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "email")
-    private String email;
     @Size(max = 50)
     @Column(name = "amai")
     private String amai;
@@ -163,17 +115,9 @@ public class Formulariogeneral implements Serializable {
         this.id = id;
     }
 
-    public Formulariogeneral(Integer id, Date creacion, String nombre, String edad, String escolaridad, String estadoCivil, String afiliacion, String padecimientos, boolean cohabitacion, String email, int pacienteId) {
+    public Formulariogeneral(Integer id, Date creacion, int pacienteId) {
         this.id = id;
         this.creacion = creacion;
-        this.nombre = nombre;
-        this.edad = edad;
-        this.escolaridad = escolaridad;
-        this.estadoCivil = estadoCivil;
-        this.afiliacion = afiliacion;
-        this.padecimientos = padecimientos;
-        this.cohabitacion = cohabitacion;
-        this.email = email;
         this.pacienteId = pacienteId;
     }
 
@@ -199,70 +143,6 @@ public class Formulariogeneral implements Serializable {
 
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public String getEdad() {
-        return edad;
-    }
-
-    public void setEdad(String edad) {
-        this.edad = edad;
-    }
-
-    public String getEscolaridad() {
-        return escolaridad;
-    }
-
-    public void setEscolaridad(String escolaridad) {
-        this.escolaridad = escolaridad;
-    }
-
-    public String getEstadoCivil() {
-        return estadoCivil;
-    }
-
-    public void setEstadoCivil(String estadoCivil) {
-        this.estadoCivil = estadoCivil;
-    }
-
-    public String getAfiliacion() {
-        return afiliacion;
-    }
-
-    public void setAfiliacion(String afiliacion) {
-        this.afiliacion = afiliacion;
-    }
-
-    public String getPadecimientos() {
-        return padecimientos;
-    }
-
-    public void setPadecimientos(String padecimientos) {
-        this.padecimientos = padecimientos;
-    }
-
-    public boolean getCohabitacion() {
-        return cohabitacion;
-    }
-
-    public void setCohabitacion(boolean cohabitacion) {
-        this.cohabitacion = cohabitacion;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public String getAmai() {

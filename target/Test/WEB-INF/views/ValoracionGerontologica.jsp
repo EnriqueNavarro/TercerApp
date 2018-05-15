@@ -22,7 +22,13 @@
             <body>
                 <form method="post" action="evaluacionGerontologicaSubmit" id="form1">
                 <div class="container ">
-                    <h1 class="well">Evaluación gerontológica del paciente</h1>
+                    <h1 class="well">Evaluación gerontológica del paciente</h1
+                    <div class="row">
+                        <div class="col-4">
+                          <label>Paciente:</label>
+                            <input type="text" placeholder="id" class="form-control" id="pacienteid" name="pacienteid" >
+                        </div>
+                    </div>
                     <table class="table table-striped table-hover table-bordered">
                     <thead>
                       <tr>
@@ -32,14 +38,12 @@
                       <tr>
                         <th scope="row">1</th>
                         <td colspan="2">Dispositivos en uso: </td>
-                        <td colspan="2"><input type="text" name="dU" value="Lap-top, tableta teléfono inteligente y cámara fotográfica"/></td>
-                        
+                        <td colspan="2"><input type="text" name="dU" value="Lap-top, tableta teléfono inteligente y cámara fotográfica"/></td>    
                       </tr>
                       <tr>
                         <th scope="row">2</th>
                         <td colspan="2">Dispositivo de mayor uso: </td>
                         <td colspan="2"><input type="text" name="dMU" value="Lap-top y teléfono inteligente"/></td>
-
                       </tr>
                       <tr>
                         <th scope="row">3</th>
@@ -72,7 +76,9 @@
                   </div>
                 <input type="submit" value="Guardar" class="btn btn-success" />
             </form>
+            <form method="post" action="salirSinGuardar">
                 <input type="submit" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+            </form>
             </body>
 
             </html>

@@ -22,8 +22,7 @@
         </script>
     </head>
     <body>
-        <body>
-                <form method="post" action="evaluacionNutricionalSubmit">
+            <form method="post" action="evaluacionNutricionalSubmit">
                 <div class="container ">
                     <h1 class="well">Evaluación nutricional del paciente</h1>
                     <div class="row">
@@ -101,6 +100,8 @@
                   </div>
                 <input type="submit" value="Guardar" class="btn btn-success" />
                 </form>
-                <input type="submit" onclick="location.href='/TercerApp'" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+                <form method="post" action="salirSinGuardar">
+                    <input type="submit" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+                </form>
     </body>
 </html>

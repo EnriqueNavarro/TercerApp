@@ -6,7 +6,6 @@
 package sistema.tercerapp.model;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -16,35 +15,33 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
 
 /**
  *
- * @author Francisco
+ * @author Kenyiro
  */
 @Entity
 @Table(name = "formularioss")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Formularioss.findAll", query = "SELECT f FROM Formularioss f"),
-    @NamedQuery(name = "Formularioss.findById", query = "SELECT f FROM Formularioss f WHERE f.id = :id"),
-    @NamedQuery(name = "Formularioss.findByCreacion", query = "SELECT f FROM Formularioss f WHERE f.creacion = :creacion"),
-    @NamedQuery(name = "Formularioss.findByLastUpdated", query = "SELECT f FROM Formularioss f WHERE f.lastUpdated = :lastUpdated"),
-    @NamedQuery(name = "Formularioss.findByNombre", query = "SELECT f FROM Formularioss f WHERE f.nombre = :nombre"),
-    @NamedQuery(name = "Formularioss.findByEdad", query = "SELECT f FROM Formularioss f WHERE f.edad = :edad"),
-    @NamedQuery(name = "Formularioss.findByDispositivos", query = "SELECT f FROM Formularioss f WHERE f.dispositivos = :dispositivos"),
-    @NamedQuery(name = "Formularioss.findByDispMayorUso", query = "SELECT f FROM Formularioss f WHERE f.dispMayorUso = :dispMayorUso"),
-    @NamedQuery(name = "Formularioss.findByFrecuencia", query = "SELECT f FROM Formularioss f WHERE f.frecuencia = :frecuencia"),
-    @NamedQuery(name = "Formularioss.findByActividadesUso", query = "SELECT f FROM Formularioss f WHERE f.actividadesUso = :actividadesUso"),
-    @NamedQuery(name = "Formularioss.findByUsosFavorecer", query = "SELECT f FROM Formularioss f WHERE f.usosFavorecer = :usosFavorecer"),
-    @NamedQuery(name = "Formularioss.findByDiagnosis", query = "SELECT f FROM Formularioss f WHERE f.diagnosis = :diagnosis")})
+    @NamedQuery(name = "Formularioss.findAll", query = "SELECT f FROM Formularioss f")
+    , @NamedQuery(name = "Formularioss.findById", query = "SELECT f FROM Formularioss f WHERE f.id = :id")
+    , @NamedQuery(name = "Formularioss.findByCreacion", query = "SELECT f FROM Formularioss f WHERE f.creacion = :creacion")
+    , @NamedQuery(name = "Formularioss.findByLastUpdated", query = "SELECT f FROM Formularioss f WHERE f.lastUpdated = :lastUpdated")
+    , @NamedQuery(name = "Formularioss.findByDispositivos", query = "SELECT f FROM Formularioss f WHERE f.dispositivos = :dispositivos")
+    , @NamedQuery(name = "Formularioss.findByDispMayorUso", query = "SELECT f FROM Formularioss f WHERE f.dispMayorUso = :dispMayorUso")
+    , @NamedQuery(name = "Formularioss.findByFrecuencia", query = "SELECT f FROM Formularioss f WHERE f.frecuencia = :frecuencia")
+    , @NamedQuery(name = "Formularioss.findByActividadesUso", query = "SELECT f FROM Formularioss f WHERE f.actividadesUso = :actividadesUso")
+    , @NamedQuery(name = "Formularioss.findByUsosFavorecer", query = "SELECT f FROM Formularioss f WHERE f.usosFavorecer = :usosFavorecer")
+    , @NamedQuery(name = "Formularioss.findByApoyoSocial", query = "SELECT f FROM Formularioss f WHERE f.apoyoSocial = :apoyoSocial")
+    , @NamedQuery(name = "Formularioss.findByActividadesComunitarias", query = "SELECT f FROM Formularioss f WHERE f.actividadesComunitarias = :actividadesComunitarias")
+    , @NamedQuery(name = "Formularioss.findByPacienteId", query = "SELECT f FROM Formularioss f WHERE f.pacienteId = :pacienteId")})
 public class Formularioss implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -61,35 +58,31 @@ public class Formularioss implements Serializable {
     @Column(name = "lastUpdated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 50)
-    @Column(name = "nombre")
-    private String nombre;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "edad")
-    private int edad;
-    @Size(max = 50)
+    @Size(max = 250)
     @Column(name = "dispositivos")
     private String dispositivos;
-    @Size(max = 50)
+    @Size(max = 250)
     @Column(name = "dispMayorUso")
     private String dispMayorUso;
-    @Size(max = 50)
+    @Size(max = 250)
     @Column(name = "frecuencia")
     private String frecuencia;
-    @Size(max = 50)
+    @Size(max = 250)
     @Column(name = "actividadesUso")
     private String actividadesUso;
-    @Size(max = 50)
+    @Size(max = 250)
     @Column(name = "usosFavorecer")
     private String usosFavorecer;
-    @Size(max = 50)
-    @Column(name = "diagnosis")
-    private String diagnosis;
-    @OneToMany(mappedBy = "idformularioSS")
-    private Collection<Pacientes> pacientesCollection;
+    @Size(max = 250)
+    @Column(name = "apoyoSocial")
+    private String apoyoSocial;
+    @Size(max = 250)
+    @Column(name = "actividadesComunitarias")
+    private String actividadesComunitarias;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "paciente_id")
+    private int pacienteId;
 
     public Formularioss() {
     }
@@ -98,11 +91,10 @@ public class Formularioss implements Serializable {
         this.id = id;
     }
 
-    public Formularioss(Integer id, Date creacion, String nombre, int edad) {
+    public Formularioss(Integer id, Date creacion, int pacienteId) {
         this.id = id;
         this.creacion = creacion;
-        this.nombre = nombre;
-        this.edad = edad;
+        this.pacienteId = pacienteId;
     }
 
     public Integer getId() {
@@ -127,22 +119,6 @@ public class Formularioss implements Serializable {
 
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
-    }
-
-    public String getNombre() {
-        return nombre;
-    }
-
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
-    }
-
-    public int getEdad() {
-        return edad;
-    }
-
-    public void setEdad(int edad) {
-        this.edad = edad;
     }
 
     public String getDispositivos() {
@@ -185,21 +161,28 @@ public class Formularioss implements Serializable {
         this.usosFavorecer = usosFavorecer;
     }
 
-    public String getDiagnosis() {
-        return diagnosis;
+    public String getApoyoSocial() {
+        return apoyoSocial;
     }
 
-    public void setDiagnosis(String diagnosis) {
-        this.diagnosis = diagnosis;
+    public void setApoyoSocial(String apoyoSocial) {
+        this.apoyoSocial = apoyoSocial;
     }
 
-    @XmlTransient
-    public Collection<Pacientes> getPacientesCollection() {
-        return pacientesCollection;
+    public String getActividadesComunitarias() {
+        return actividadesComunitarias;
     }
 
-    public void setPacientesCollection(Collection<Pacientes> pacientesCollection) {
-        this.pacientesCollection = pacientesCollection;
+    public void setActividadesComunitarias(String actividadesComunitarias) {
+        this.actividadesComunitarias = actividadesComunitarias;
+    }
+
+    public int getPacienteId() {
+        return pacienteId;
+    }
+
+    public void setPacienteId(int pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
     @Override

@@ -162,7 +162,7 @@ public class AppController {
             @RequestParam(value="velocidadDeMarchaRes") String velocidadDeMarchaRes, @RequestParam(value="velocidadDeMarchaIntr") String velocidadDeMarchaIntr,
             @RequestParam(value="debilitamientoRes") String debilitamientoRes, @RequestParam(value="debilitamientoIntr") String debilitamientoIntr,
             @RequestParam(value="actividadFisicaRes") String actividadFisicaRes, @RequestParam(value="actividadFisicaIntr") String actividadFisicaIntr,
-            @RequestParam(value="diagnosticoRes") String diagnosticoRes, @RequestParam(value="diagnosticoIntr") String diagnosticoIntr,
+            @RequestParam(value="diagnosticoRes") String diagnosticoRes,
             ModelMap model){
         
         Formulariogeneral fg = new Formulariogeneral();
@@ -208,6 +208,8 @@ public class AppController {
         }
         
         fg.setPacienteId(Id);
+        fg.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
+        fg.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
         
         fgService.saveFormularioGeneral(fg);
         
@@ -220,10 +222,11 @@ public class AppController {
         }
     }
     @RequestMapping(value = "/evaluacionGerontologicaSubmit", method = RequestMethod.POST)
-    public String comepleteEvaluacionGerontologicaSubmit(@RequestParam( value ="dU", required = false) String dispositivosUso, 
-            @RequestParam( value ="dMU", required = false) String dispositivosMayorUso,
+    public String comepleteEvaluacionGerontologicaSubmit(@RequestParam(value="pacienteid", required=false) int Id,
+    @RequestParam( value ="dU", required = false) String dispositivosUso, @RequestParam( value ="dMU", required = false) String dispositivosMayorUso,
     @RequestParam( value="frecuenciaU") String frecuenciaUso,  @RequestParam("actU") String actividadesUso, 
-    @RequestParam("usosFav") String usosFavorecer,  @RequestParam("apoyoSocial") String apoyoSocial, @RequestParam("actComu") String actividadesComunitarias, ModelMap model) {
+    @RequestParam("usosFav") String usosFavorecer,  @RequestParam("apoyoSocial") String apoyoSocial,
+    @RequestParam("actComu") String actividadesComunitarias, ModelMap model) {
              
         Formularioss fss = new Formularioss();
         
@@ -234,11 +237,11 @@ public class AppController {
             fss.setDispMayorUso(dispositivosMayorUso);
         }
         
-                if(frecuenciaUso != null){
+        if(frecuenciaUso != null){
             fss.setFrecuencia(frecuenciaUso);
         }     
                 
-                if(actividadesUso != null){
+        if(actividadesUso != null){
             fss.setActividadesUso(actividadesUso);
         }      
                 
@@ -246,16 +249,15 @@ public class AppController {
             fss.setUsosFavorecer(usosFavorecer);
         }
         if(apoyoSocial != null){
+                fss.setApoyoSocial(apoyoSocial);
         }
-                
-                
-                
         if(actividadesComunitarias != null){
+            fss.setActividadesComunitarias(actividadesComunitarias);
         }
-        
-        
+   
         //terminar de llenar todos los campos
-        
+        fss.setPacienteId(Id);
+
         fss.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
         fss.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
 
@@ -269,9 +271,11 @@ public class AppController {
 
         }
     }
+    
+    
     @RequestMapping(value = "/evaluacionNutricionalSubmit", method = RequestMethod.POST)
-    public String comepleteEvaluacionNutricionalSubmit(@RequestParam( value ="w", required = false) String peso, 
-            @RequestParam( value ="iw", required = false) String intPeso,
+    public String comepleteEvaluacionNutricionalSubmit(@RequestParam(value="pacienteid", required=false) int Id,
+    @RequestParam( value ="w", required = false) String peso, @RequestParam( value ="iw", required = false) String intPeso,
     @RequestParam( value="e") String electrolitos,  @RequestParam("ie") String intElectrolitos, 
     @RequestParam("a") String albumina,  @RequestParam("ia") String intAlbumina, @RequestParam("imc") String imc,
     @RequestParam("iimc") String intImc,@RequestParam("db") String diamBrazo,@RequestParam("idb") String intDiamBrazo,
@@ -349,6 +353,7 @@ public class AppController {
             fss.setPeso(Double.parseDouble(peso));
         }
         
+        fss.setPacienteId(Id);
         //terminar de llenar todos los campos
         
         fss.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
@@ -593,6 +598,19 @@ public class AppController {
         }else{
                     return "adminDashboard";
 
-        }    }
+        }    
+    }
+    
+    @RequestMapping(value = {"/salirSinGuardar"})
+    public String salirSinGuardar(ModelMap model) {
+        
+        if(user){
+                    return "usuarioDashboard";
+
+        }else{
+                    return "adminDashboard";
+
+        }
+    }
 
 }

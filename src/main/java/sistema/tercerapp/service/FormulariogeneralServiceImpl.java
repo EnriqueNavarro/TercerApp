@@ -38,7 +38,7 @@ public class FormulariogeneralServiceImpl implements FormulariogeneralService{
     public void updateFormularioGeneral(Formulariogeneral fm) {
     Formulariogeneral entity = dao.findById(fm.getId());
         if(entity!=null){
-            entity.setNombre(fm.getNombre()); //actualizar formulario
+            //actualizar formulario
 
         }        
     }

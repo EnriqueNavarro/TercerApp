@@ -26,6 +26,17 @@
                                         }
                                     });
                                 });
+                    $('#evaluacionNutricionalID').click(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '${pageContext.request.contextPath}/EvaluacionNutricional',
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });            
                     $('#evaluacionGeriatricaID').click(function() {
                     $.ajax({
                         type: 'POST',
@@ -122,6 +133,9 @@
                                 </div>
                                 <div class="top-buffer">
                                     <input type="button" value="Valoración fitbit"  id="resultadosFitbitID" class="btn btn-success">
+                                </div>
+                                <div class="top-buffer">
+                                    <input type="button" value="Valoración nutricional"  id="evaluacionNutricionalID" class="btn btn-success">
                                 </div>
                                <div class="top-buffer">
                                     <input type="button" value="Valoración gerontológica" id="valoracionGerontologicaID" class="btn btn-primary">

@@ -19,11 +19,12 @@ import sistema.tercerapp.model.Usuarios;
 import sistema.tercerapp.model.Pacientes;
 import sistema.tercerapp.model.Formulariogeneral;
 import sistema.tercerapp.model.Formularioss;
+import sistema.tercerapp.model.Formularionutricion;
 import sistema.tercerapp.service.UsuariosService;
 import sistema.tercerapp.service.PacientesService;
 import sistema.tercerapp.service.FormulariogeneralService;
 import sistema.tercerapp.service.FormulariossService;
-
+import sistema.tercerapp.service.FormularionutricionService;
 
 /**
  *
@@ -39,8 +40,9 @@ public class AppController {
         PacientesService pacienteService;
         @Autowired
         FormulariogeneralService fgService;
-        
-                @Autowired
+        @Autowired
+        FormularionutricionService NService;
+        @Autowired
         FormulariossService formulariosSSService;
             private boolean user= false;
 
@@ -119,6 +121,10 @@ public class AppController {
     @RequestMapping(value = {"/EvaluacionGeriatrica"})
     public String showEvaluacionGeriatrica(ModelMap model) {
         return "EvaluacionGeriatrica";
+    }
+    @RequestMapping(value = {"/EvaluacionNutricional"})
+    public String showEvaluacionNutricional(ModelMap model) {
+        return "EvaluacionNutricional";
     }
     
     
@@ -213,7 +219,6 @@ public class AppController {
 
         }
     }
-    
     @RequestMapping(value = "/evaluacionGerontologicaSubmit", method = RequestMethod.POST)
     public String comepleteEvaluacionGerontologicaSubmit(@RequestParam( value ="dU", required = false) String dispositivosUso, 
             @RequestParam( value ="dMU", required = false) String dispositivosMayorUso,
@@ -255,6 +260,101 @@ public class AppController {
         fss.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
 
         formulariosSSService.saveFormularioss(fss);
+
+        if(user){
+                    return "usuarioDashboard";
+
+        }else{
+                    return "adminDashboard";
+
+        }
+    }
+    @RequestMapping(value = "/evaluacionNutricionalSubmit", method = RequestMethod.POST)
+    public String comepleteEvaluacionNutricionalSubmit(@RequestParam( value ="w", required = false) String peso, 
+            @RequestParam( value ="iw", required = false) String intPeso,
+    @RequestParam( value="e") String electrolitos,  @RequestParam("ie") String intElectrolitos, 
+    @RequestParam("a") String albumina,  @RequestParam("ia") String intAlbumina, @RequestParam("imc") String imc,
+    @RequestParam("iimc") String intImc,@RequestParam("db") String diamBrazo,@RequestParam("idb") String intDiamBrazo,
+    @RequestParam("dp") String diamPierna, @RequestParam("idp") String intDiamPierna,@RequestParam("da") String diamAbdomen,
+    @RequestParam("ida") String intDiamAbdomen,@RequestParam("p") String presion,@RequestParam("ip") String intPresion,
+    @RequestParam("bh") String BH,@RequestParam("ibh") String intBH,@RequestParam("g") String glucosa,
+    @RequestParam("ig") String intGlucosa,@RequestParam("l") String lipidos,@RequestParam("il") String intLipidos,
+    ModelMap model) {
+             
+        Formularionutricion fss = new Formularionutricion();
+        if(intLipidos != null){
+            fss.setIntLipidos(intLipidos);
+        }
+        if(lipidos != null){
+            fss.setLipidos(Double.parseDouble(lipidos));
+        }
+        if(intGlucosa != null){
+            fss.setIntGlucosa(intGlucosa);
+        }
+        if(glucosa != null){
+            fss.setGlucosa(Double.parseDouble(glucosa));
+        }
+        if(intBH != null){
+            fss.setIntBH(intBH);
+        }
+        if(BH != null){
+            fss.setBh(Double.parseDouble(BH));
+        }
+        if(intPresion != null){
+            fss.setIntPresion(intPresion);
+        }
+        if(presion != null){
+            fss.setPresion(Double.parseDouble(presion));
+        }
+        if(intDiamAbdomen != null){
+            fss.setIntDiametroAbdomen(intDiamAbdomen);
+        }
+        if(diamAbdomen != null){
+            fss.setDiametroAbdomen(Double.parseDouble(diamAbdomen));
+        }
+        if(intDiamPierna != null){
+            fss.setIntDiametroPierna(intDiamPierna);
+        }
+        if(diamPierna != null){
+            fss.setDiametroPierna(Double.parseDouble(diamPierna));
+        }
+        if(intDiamBrazo != null){
+            fss.setIntDiametroBrazo(intDiamBrazo);
+        }
+        if(diamBrazo != null){
+            fss.setDiametroBrazo(Double.parseDouble(diamBrazo));
+        }
+        if(intImc != null){
+            fss.setIntIMC(intImc);
+        }
+        if(imc != null){
+            fss.setImc(Double.parseDouble(imc));
+        }
+        if(intAlbumina != null){
+            fss.setIntAlbumina(intAlbumina);
+        }
+        if(albumina != null){
+            fss.setAlbumina(Double.parseDouble(albumina));
+        }
+        if(intElectrolitos != null){
+            fss.setIntElectrolitos(intElectrolitos);
+        }
+        if(electrolitos != null){
+            fss.setElectrolitos(Double.parseDouble(electrolitos));
+        }
+        if(intPeso != null){
+            fss.setIntPeso(intPeso);
+        }
+        if(peso != null){
+            fss.setPeso(Double.parseDouble(peso));
+        }
+        
+        //terminar de llenar todos los campos
+        
+        fss.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
+        fss.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
+
+        NService.saveFormularionutricion(fss);
 
         if(user){
                     return "usuarioDashboard";

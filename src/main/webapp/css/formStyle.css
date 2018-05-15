@@ -1,0 +1,45 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 19-abr-2018, 10:48:40
+    Author     : Francisco
+*/
+
+body{
+    font-family: 'Raleway', sans-serif;
+}
+
+#submitID{
+    margin-top: 30px;
+    text-align: center;
+}
+
+#divFormID{
+    position:absolute;
+    left:25%;
+}
+
+.centerData{    margin: 0 auto;
+    margin-left: 250px;}
+
+.top-buffer { margin-top:20px; }
+
+.creationInfo{
+    margin-top: 38px;
+}
+
+#formR{
+    margin-top: 30px;
+}
+
+#graficaFitbit{
+    height: 400px;
+    width: 600px;
+}
+
+#btnSalirID{
+    margin-left: 30px;
+}

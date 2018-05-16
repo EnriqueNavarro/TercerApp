@@ -40,10 +40,10 @@
                 //Ocultar todos los divs
 
                                 
-                    $('.verGeriatriaC').click(function() {
+                    $('.verReporteGerontologico').click(function() {
                     $.ajax({
                         type: 'GET',
-                        url: '${pageContext.request.contextPath}/verGeriatrica?idGeriatrica='+selectedIdAnswer,
+                        url: '${pageContext.request.contextPath}/verHistorialGerontologicoC?idGerontologico='+selectedIdAnswer,
                                         success: function(result) {
                                             $('#infoScreen').html(result);
                                             
@@ -76,6 +76,7 @@
                         <th scope="col">Usos a favorecer</th>
                         <th scope="col">Apoyo Social</th>
                         <th scope="col">Actividades Comunitarias</th>
+                        <th scope="col">Generar Reporte</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -91,6 +92,9 @@
                         <td>${f.getUsosFavorecer()}</td>
                         <td>${f.getApoyoSocial()}</td>
                         <td>${f.getActividadesComunitarias()}</td>
+                        <td>
+                        <button type="button" class="btn btn-outline-primary verReporteGerontologico" id="" onclick="setValue(${f.getId()})">Generar Reporte</button>
+                        </td>
                         </tr>
                     </c:forEach>
 
@@ -98,7 +102,10 @@
                   </table>
                
                   </div>
-                
+                <form method="post" action="salirSinGuardar">
+                <input type="submit" value="Salir" class="btn btn-primary top-buffer" />
+            </form>
+
              </body>
 </html>
 

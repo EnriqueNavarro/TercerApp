@@ -112,6 +112,16 @@ public class AppController {
         return "ValoracionGerontologica";
     }
     
+            
+    @RequestMapping(value = {"/verHistorialGerontologicoC"}, method = RequestMethod.GET)
+    public String showHistorialGerontologicoC(@RequestParam("idGerontologico") int idGerontologico, ModelMap model) {
+        
+        Formularioss fss = formulariosSSService.findById(idGerontologico);
+        model.addAttribute("Formulario", fss);
+        
+        return "verValoracionGerontologica";
+    }
+    
     	@RequestMapping(value = {"/modificarUsuarioC"},method = RequestMethod.GET)
 	public String initForm(Model model) {
 		Usuarios usuario= new Usuarios();

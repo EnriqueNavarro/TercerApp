@@ -26,13 +26,13 @@
 
             <body>
                 <form method="post" action="evaluacionGeriatricaSubmit">
-                <div class="container ">
+                    <div class="container " id="HTMLtoPDF">
                     <h1 class="well">Evaluación geriátrica del paciente</h1>
                     <table class="table table-striped table-hover table-bordered">
                     <thead>
                       <tr>
                         <th scope="col">Pruebas Aplicadas</th>
-                        <th scope="col">Resultado</th>
+                        <th scope="col">Resultado   :     Última evaluación</th>
                         <th scope="col">Interpretación</th>
                       </tr>
                     </thead>
@@ -40,43 +40,43 @@
              <input type="hidden" value="" class="form-control" id="pacienteID" name="pacienteid" >
                       <tr>
                           <td>Evaluación de Katz</td>
-                          <td><input type="text" name="evalKatzRes" value="${FG.getKartz()}"/></td>
-                          <td><input type="text" name="evalKatzIntr" value="3.43"/></td>
+                          <td><input type="text" name="evalKatzRes" value="${FG.getKartz()}"/>:      ${FG.getKartz()}</td>
+                          <td><input type="text" name="evalKatzIntr" value="3.43"/>Normal</td>
                       </tr>
                       <tr>
                         <td>Escala de Borthel</td>
-                        <td><input type="text" name="escalaBorthelRes" value="2.43"/></td>
-                        <td><input type="text" name="escalaBorthelIntr" value="2.43"/></td>
+                        <td><input type="text" name="escalaBorthelRes" value="${FG.getBarthel()}"/>:  ${FG.getBarthel()}</td>
+                        <td><input type="text" name="escalaBorthelIntr" value="2.43"/>Normal</td>
                       </tr>
                       <tr>
                         <td>Escala de Lawton-Brady</td>
-                        <td><input type="text" name="lawtonRes" value="2.43"/></td>
-                        <td><input type="text" name="lawtonIntr" value="2.43"/></td>
+                        <td><input type="text" name="lawtonRes" value="${FG.getLawtonBrody()}"/>:${FG.getLawtonBrody()}</td>
+                        <td><input type="text" name="lawtonIntr" value="2.43"/>Normal</td>
                       </tr>
                       <tr>
                         <td>Examen mínimo del estado mental</td>
-                        <td><input type="text" name="exMinRes" value="2.43"/></td>
-                        <td><input type="text" name="exMinIntr" value="2.43"/></td>
+                        <td><input type="text" name="exMinRes" value="${FG.getMental()}"/>:${FG.getMental()}</td>
+                        <td><input type="text" name="exMinIntr" value="2.43"/>Normal</td>
                       </tr>
                                             <tr>
                         <td>Escala de Depresión Geriátrica</td>
-                        <td><input type="text" name="depresionRes" value="2.43"/></td>
-                        <td><input type="text" name="depresionIntr" value="2.43"/></td>
+                        <td><input type="text" name="depresionRes" value="${FG.getEscalaDepresion()}"/>:${FG.getEscalaDepresion()}</td>
+                        <td><input type="text" name="depresionIntr" value="2.43"/>Normal</td>
                       </tr>
                       <tr>
                         <td>Cribado nutricional</td>
-                        <td><input type="text" name="cribadoRes" value="2.43"/></td>
-                        <td><input type="text" name="cribadoIntr" value="2.43"/></td>
+                        <td><input type="text" name="cribadoRes" value="${FG.getNutricional()}"/>:${FG.getNutricional()}</td>
+                        <td><input type="text" name="cribadoIntr" value="2.43"/>Normal</td>
                       </tr>
                        <tr>
                         <td>Prueba corta de desempeño físico</td>
-                        <td><input type="text" name="pruebaFisicoRes" value="2.43"/></td>
-                        <td><input type="text" name="pruebaFisicoIntr" value="2.43"/></td>
+                        <td><input type="text" name="pruebaFisicoRes" value="${FG.getResistencia()}"/>:${FG.getResistencia()}</td>
+                        <td><input type="text" name="pruebaFisicoIntr" value="2.43"/>Bueno</td>
                       </tr>
                       <tr>
                         <td>Prueba levántate y anda</td>
-                        <td><input type="text" name="levantateAndaRes" value="2.43"/></td>
-                        <td><input type="text" name="levantateAndaIntr" value="2.43"/></td>
+                        <td><input type="text" name="levantateAndaRes" value="${FG.getActividad()}"/>:${FG.getActividad()}</td>
+                        <td><input type="text" name="levantateAndaIntr" value="2.43"/>Normal</td>
                       </tr>
                     </tbody>
                   </table>
@@ -91,39 +91,47 @@
                     <tbody>
                       <tr>
                         <td>Perdida de peso</td>
-                        <td><input type="text" name="perdidaPesoRes" value="2.43"/></td>
-                        <td><input type="text" name="perdidaPesoIntr" value="2.43"/></td>
+                        <td><input type="text" name="perdidaPesoRes" value="${FG.getPerdidaPeso()}"/>:${FG.getPerdidaPeso()}</td>
+                        <td><input type="text" name="perdidaPesoIntr" value="2.43"/>Normal</td>
                       </tr>
                       <tr>
                         <td>Pobre resistencia y energía disminuida</td>
-                        <td><input type="text" name="pobreResistenciaYEnergiaRes" value="2.43"/></td>
-                        <td><input type="text" name="pobreResistenciaYEnergiaIntr" value="2.43"/></td>
+                        <td><input type="text" name="pobreResistenciaYEnergiaRes" value="${FG.getResistencia()}"/>:${FG.getResistencia()}</td>
+                        <td><input type="text" name="pobreResistenciaYEnergiaIntr" value="2.43"/>Normal</td>
                       </tr>
                       <tr>
                         <td>Velocidad de la marcha</td>
-                        <td><input type="text" name="velocidadDeMarchaRes" value="2.43"/></td>
-                        <td><input type="text" name="velocidadDeMarchaIntr" value="2.43"/></td>
+                        <td><input type="text" name="velocidadDeMarchaRes" value="${FG.getVelocidad()}"/>:${FG.getVelocidad()}</td>
+                        <td><input type="text" name="velocidadDeMarchaIntr" value="2.43"/>Normal</td>
                       </tr>
                       <tr>
                         <td>Debilitamiento(Fuerza de Prensión)</td>
-                        <td><input type="text" name="debilitamientoRes" value="2.43"/></td>
-                        <td><input type="text" name="debilitamientoIntr" value="2.43"/></td>
+                        <td><input type="text" name="debilitamientoRes" value="${FG.getDebilitaminto()}"/>:${FG.getDebilitamiento()}</td>
+                        <td><input type="text" name="debilitamientoIntr" value="2.43"/>Normal</td>
                       </tr>
                                             <tr>
                         <td>Actividad Física</td>
-                        <td><input type="text" name="actividadFisicaRes" value="2.43"/></td>
-                        <td><input type="text" name="actividadFisicaIntr" value="2.43"/></td>
+                        <td><input type="text" name="actividadFisicaRes" value="${FG.getActividad()}"/>:${FG.getActividad()}</td>
+                        <td><input type="text" name="actividadFisicaIntr" value="2.43"/>Normal</td>
                       </tr>
                       <tr>
                         <td>Diagnóstico</td>
-                        <td><input type="text" name="diagnosticoRes" value="2.43"/></td>
-                        <td><input type="text" name="diagnosticoIntr" value="2.43"/></td>
+                        <td><input type="text" name="diagnosticoRes" value="${FG.getDiagnostico()}"/>:${FG.getDiagnostico()}</td>
+                        <td><input type="text" name="diagnosticoIntr" value="2.43"/>Bueno</td>
                       </tr>
                     </tbody>
                   </table>
                   </div>
+                <input type="submit" value="Guardar" class="btn btn-success" />
+                <button type="button" class="btn btn-outline-primary" id="generarReporteID" onClick="HTMLtoPDF()">Generar Reporte</button>
             </form>
-                <input type="submit" onclick="location.href='/TercerApp'" value="Salir" class="btn btn-primary top-buffer" />
+            <form method="post" action="salirSinGuardar">
+                <input type="submit" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+            </form>
+                      
+             <script src="js/jspdf.js"></script>
+             <script src="js/jquery-2.1.3.js"></script>
+             <script src="js/pdfFromHTML.js"></script>
             </body>
 
             </html>

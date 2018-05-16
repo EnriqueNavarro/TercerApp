@@ -51,6 +51,9 @@
             <textarea name='jsonresult' rows='4' cols='50' id="results" hidden></textarea>
         </div>
         <div class="ct-chart ct-perfect-fourth"></div>
+        <form method="post" action="salirSinGuardar">
+            <input type="submit" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+        </form>
         <script>
             function graphMovility(jsondata) {
                 jsondata = JSON.parse(jsondata)

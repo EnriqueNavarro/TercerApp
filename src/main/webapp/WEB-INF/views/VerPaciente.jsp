@@ -69,36 +69,39 @@
 
             <body>
                 <div class="container centerData">
-                    <h1 class="well">Datos generales del paciente</h1>
+                    
                     <div class="" id="">
                         <div class="row">
                             <form role="form" id="form1" method="post" action="pacienteModificado">
+                              <div id="HTMLtoPDF">
+                                <h1 class="well">Datos generales del paciente</h1>
                                     <div class="row">
                                         <div class="col-5">
-                                          <label>Nombre</label>
-                                          <input type="text" value="${Paciente.getNombre()}" class="form-control" id="nombreCompletoID" name="nombre" >
+                                          <label>Nombre: ${Paciente.getNombre()}</label>
+                                          <input type="text" value="${Paciente.getNombre()}" class="form-control" id="nombreCompletoID" name="nombre">
+                                          
                                         </div>
                                         <input type="hidden" value="${Paciente.getId()}" class="form-control" id="nombreCompletoID" name="pacienteid" >
                                         <div class="col-5">
-                                          <label>ApellidoPaterno</label>
+                                          <label>Apellido Paterno: ${Paciente.getApellidoPaterno()}</label>
                                           <input type="text" value="${Paciente.getApellidoPaterno()}" class="form-control" id="nombreCompletoID" name="aPaterno" >
                                         </div>                                    
                                         <div class="col-5">
-                                          <label>Apellido Materno</label>
+                                          <label>Apellido Materno: ${Paciente.getApellidoMaterno()}</label>
                                           <input type="text" value="${Paciente.getApellidoMaterno()}" class="form-control" id="nombreCompletoID" name="aMaterno" >
                                         </div>
                                         </div>
                                     <div class="row top-buffer">
                                         <div class="col-5">
-                                           <label>Correo Electrónico</label>
+                                           <label>Correo Electrónico: ${Paciente.getEmail()}</label>
                                            <input type="text" value="${Paciente.getEmail()}" class="form-control" id="emailID" name="email" >
                                         </div>
                                              <div class="col-5 top-buffer">
-                                          <label>Edad</label>
+                                          <label>Edad: ${Paciente.getEdad()}</label>
                                             <input type="text" value="${Paciente.getEdad()}" class="form-control" id="edadID" name="edad" >
                                         </div>
                                         <div class="col-5 top-buffer">
-                                          <label>Estado Civil</label>
+                                          <label>Estado Civil:${Paciente.getEstadoCivil()}</label>
                                             <input type="text" value="${Paciente.getEstadoCivil()}" class="form-control" id="edadID" name="estadoCivil" >
                                         </div>
                                     </div>
@@ -106,36 +109,36 @@
                                     <div class="row top-buffer">
                                    
                                         <div class="col-5">
-                                           <label>Co-habitación</label>
+                                           <label>Co-habitación: ${Paciente.getCohabitacion()}</label>
                                             <input type="text" value="${Paciente.getCohabitacion()}" class="form-control" id="cohabitacionID" name="cohabitacion" >
                                         </div>
                                             <div class="col-5">
-                                          <label>Escolaridad máxima alcanzada</label>
+                                          <label>Escolaridad máxima alcanzada: ${Paciente.getEscolaridad()}</label>
                                             <input type="text" value="${Paciente.getEscolaridad()}" class="form-control" id="escolaridadID" name="escolaridadMax" >
                                         </div>
                                         <div class="col-5 top-buffer">
-                                           <label>Afiliación Médica</label>
+                                           <label>Afiliación Médica: ${Paciente.getAfiliacion()}</label>
                                            <input type="text" value="${Paciente.getAfiliacion()}" class="form-control" id="afilID" name="afiliacionMedica" >
                                         </div>
                                     </div>
                                     <div class="row top-buffer">
                                         <div class="col-5">
-                                           <label>Escala AMAI</label>
+                                           <label>Escala AMAI: ${Paciente.getEscalaAMAI()}</label>
                                            <input type="text" value="${Paciente.getEscalaAMAI()}" class="form-control" id="escalaAMAID" name="escalaAMAI" >
                                         </div>
                                           <div class="col-5 top-buffer">
-                                          <label>Autoreporte de padecimientos</label>
+                                          <label>Autoreporte de padecimientos: ${Paciente.getAutopadecimiento()}</label>
                                             <input type="text" value="${Paciente.getAutopadecimiento()}" class="form-control" id="autoreporteID" name="autoreportePadecimientos" >
                                         </div>
                                         <div class="col-5">
-                                           <label>Teléfono</label>
+                                           <label>Teléfono: ${Paciente.getTelefono()}</label>
                                            <input type="text" value="${Paciente.getTelefono()}" class="form-control" id="telefonoID" name="telefono" >
                                         </div>
                                     </div>
                                 
                                     <div class="row top-buffer">
                                         <div class="col-5">
-                                           <label>Dirección</label>
+                                           <label>Dirección: ${Paciente.getDireccion()}</label>
                                            <input type="text" value="${Paciente.getDireccion()}" class="form-control" id="telefonoID" name="direccion" >
                                         </div>
                                      <div class="creationInfo">
@@ -143,12 +146,19 @@
                                             <p>Última modificación del paciente: ${Paciente.getLastUpdated()}</p>
                                         </div>
                                     </div>
+                              </div>
                                 <input type="submit" value="Modificar" id="" class="btn btn-info">
-                                <button type="button" class="btn btn-outline-primary" id="generarReporteID">Generar Reporte</button>
-
+                                <button type="button" class="btn btn-outline-primary" id="generarReporteID" onClick="HTMLtoPDF()">Generar Reporte</button>
+                                <form method="post" action="salirSinGuardar">
+                                 <input type="submit" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+                                </form>
                             </form>
+                            
                         </div>
                     </div>
 
                 </div>
+             <script src="js/jspdf.js"></script>
+             <script src="js/jquery-2.1.3.js"></script>
+             <script src="js/pdfFromHTML.js"></script>
             </body>

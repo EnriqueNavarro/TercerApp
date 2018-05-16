@@ -26,7 +26,7 @@
  
             <body>
                 <form method="post" action="evaluacionGeriatricaSubmit">
-                <div class="container ">
+                    <div class="container " id="HTMLtoPDF">
                     <h1 class="well">Evaluación geriátrica del paciente</h1>
                     
                     <table class="table table-striped table-hover table-bordered">
@@ -123,10 +123,16 @@
                   </table>
                   </div>
                 <input type="submit" value="Guardar" class="btn btn-success" />
+                <button type="button" class="btn btn-outline-primary" id="generarReporteID" onClick="HTMLtoPDF()">Generar Reporte</button>
+
             </form>
             <form method="post" action="salirSinGuardar">
                 <input type="submit" value="Salir sin guardar" class="btn btn-primary top-buffer" />
             </form>
+                      
+             <script src="js/jspdf.js"></script>
+             <script src="js/jquery-2.1.3.js"></script>
+             <script src="js/pdfFromHTML.js"></script>
             </body>
 
             </html>

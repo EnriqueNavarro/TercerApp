@@ -33,7 +33,7 @@
                         <th scope="row">1</th>
                         <td colspan="2">Dispositivos en uso: </td>
                         <td colspan="2"><input type="text" name="dU" value="Lap-top, tableta teléfono inteligente y cámara fotográfica"/></td>
-                        
+                        <input type="hidden" value="${Paciente.getId()}" class="form-control" id="nombreCompletoID" name="pacienteid" >
                       </tr>
                       <tr>
                         <th scope="row">2</th>

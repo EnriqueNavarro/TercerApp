@@ -64,10 +64,33 @@
                                     });
                                 });
                                 
-                            $('.verGeriatriaC').click(function() {
+                            $('.datosGerontologicos').click(function() {
                     $.ajax({
                         type: 'GET',
-                        url: '${pageContext.request.contextPath}/verPaciente?idPaciente='+selectedIdAnswer,
+                        url: '${pageContext.request.contextPath}/verGerontologicaC?idPaciente='+selectedIdAnswer,
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });
+                                
+                    $('.verGeriatriaC').click(function() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '${pageContext.request.contextPath}/verGeriatrica?idGeriatrica='+selectedIdAnswer,
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });
+                    $('.verResultadosF').click(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '${pageContext.request.contextPath}/ResultadosFitbit',
                                         success: function(result) {
                                             $('#infoScreen').html(result);
                                             
@@ -97,7 +120,7 @@
                         <th scope="col">Evaluación geriatrica</th>
                         <th scope="col">Resultados Fitbit</th>
                         <th scope="col">Evaluación gerontológica</th>
-                        <th scope="col">Reporte</th>
+                        <th scope="col">Evaluación Nutricional</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -113,21 +136,21 @@
                         <label for="evalGeriatricas"${p.getId()}>Historial</label>
                         <c:set var="b" value="Paciente${p.getId()}" scope="page"></c:set>
                         <c:set var="a" value="${b}.get().getId()"></c:set>
-                        <select class="form-control" id="evalGeriatricas"${p.getId()} name="fgSeleccionadoo">
-                            <option>${Paciente15.get(0).getId()}</option>
-                            <option>${Paciente15.get(1).getId()}</option>
-                            <option>${Paciente15.get(2).getId()}</option>
+                        <select class="form-control" id="evalGeriatricas"${p.getId()} name="fgSeleccionado">
+                            <option onclick="setValue(13)" value="${Paciente15.get(0).getId()}">${Paciente15.get(0).getId()}</option>
+                            <option onclick="setValue(14)">${Paciente15.get(1).getId()}</option>
+                            <option onclick="setValue(15)">${Paciente15.get(2).getId()}</option>
                         </select>
                         
                          </div>
-                          <button type="button" class="btn btn-outline-primary verGeriatriaC" id="verValoracionNID">Ver</button>
+                        <button type="button" class="btn btn-outline-primary verGeriatriaC" onclick="setValue(13)" id="verValoracionNID" >Ver</button>
                           <button type="button" class="btn btn-outline-success evaluacionGeriatrica" id="evaluacionGeriatricaID" onclick="setValue(${p.getId()})">Crear</button>
                         </td>
-                        <td><button type="button" class="btn btn-outline-primary" id="resultadosFitbitID">Crear</button>
+                        <td><button type="button" class="btn btn-outline-primary verResultadosF" id="resultadosFitbitID">Ver</button>
                         </td>
-                        <td><button type="button" class="btn btn-outline-primary" id="valoracionGerontologicaID">Crear</button>
+                        <td><button type="button" class="btn btn-outline-primary datosGerontologicos" id="valoracionGerontologicaID">Crear</button>
                         </td>
-                        <td><button type="button" class="btn btn-outline-primary" id="generarReporteID">Generar</button>
+                        <td><button type="button" class="btn btn-outline-primary" id="evalNutricional">Crear</button>
                         </td>
                         </tr>
                     </c:forEach>

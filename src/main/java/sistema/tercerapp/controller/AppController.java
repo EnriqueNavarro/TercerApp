@@ -64,15 +64,22 @@ public class AppController {
         return "RegistrarUsuario";
     }
     
+        @RequestMapping(value = {"/verGeriatrica"}, method = RequestMethod.GET)
+    public String showGeriatricaP(@RequestParam(value = "idGeriatrica") int idGeriatrica,ModelMap model) {
+        
+        Formulariogeneral fg = fgService.findById(idGeriatrica);
+        
+        model.addAttribute("FG", fg);
+        
+        return "verGeriatrica";
+    }
+    
     @RequestMapping(value = {"/verPacientesC"},method = RequestMethod.GET)
 	public String verPacientesC(Model model) {
 
                 List<Formulariogeneral> fg = fgService.findAllFormularioGeneral();
 
 		List<Pacientes> pacientes = pacienteService.findAllPacientes();
-
-                
-                
                 List<String> pacientesLista = new ArrayList<String>();
                         
                int j = pacientes.size();
@@ -86,6 +93,15 @@ public class AppController {
                 model.addAttribute("Pacientes", pacientes);	
                 return "verPacientesC";
 	}
+        
+    @RequestMapping(value = {"/verGerontologicaC"}, method = RequestMethod.GET)
+    public String showVerGerontologica(@RequestParam("idPaciente") int idPaciente, ModelMap model) {
+        
+        Pacientes p = pacienteService.findById(idPaciente);
+        model.addAttribute("Paciente", p);
+        
+        return "ValoracionGerontologica";
+    }
     
     	@RequestMapping(value = {"/modificarUsuarioC"},method = RequestMethod.GET)
 	public String initForm(Model model) {
@@ -272,11 +288,14 @@ public class AppController {
     }
     
     @RequestMapping(value = "/evaluacionGerontologicaSubmit", method = RequestMethod.POST)
-    public String comepleteEvaluacionGerontologicaSubmit(@RequestParam( value ="dU", required = false) String dispositivosUso, 
+    public String comepleteEvaluacionGerontologicaSubmit(@RequestParam(value = "pacienteid") int idPaciente, @RequestParam( value ="dU", required = false) String dispositivosUso, 
             @RequestParam( value ="dMU", required = false) String dispositivosMayorUso,
     @RequestParam( value="frecuenciaU") String frecuenciaUso,  @RequestParam("actU") String actividadesUso, 
     @RequestParam("usosFav") String usosFavorecer,  @RequestParam("apoyoSocial") String apoyoSocial, @RequestParam("actComu") String actividadesComunitarias, ModelMap model) {
              
+        Pacientes p = pacienteService.findById(idPaciente);
+        model.addAttribute("Paciente", p);
+        
         Formularioss fss = new Formularioss();
         
         if(dispositivosUso != null){
@@ -313,6 +332,24 @@ public class AppController {
 
         formulariosSSService.saveFormularioss(fss);
 
+        if(p.getIdFormulariosGenerales() != null){
+        StringBuilder sb = new StringBuilder(p.getIdFormulariosSS());
+        String idFg = String.valueOf(fss.getId());
+        sb.append("-"+idFg); //0 no contara
+        String idString = sb.toString();
+   
+        p.setIdFormulariosSS(idString);
+        pacienteService.updatePacientes(p);
+        }else{
+        StringBuilder sb = new StringBuilder();
+        String idFg = String.valueOf(fss.getId());
+        sb.append(idFg);
+        String idString = sb.toString();
+   
+        p.setIdFormulariosSS(idString);
+        pacienteService.updatePacientes(p);
+        }
+        
         if(user){
                     return "usuarioDashboard";
 

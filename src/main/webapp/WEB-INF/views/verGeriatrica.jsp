@@ -40,7 +40,7 @@
              <input type="hidden" value="" class="form-control" id="pacienteID" name="pacienteid" >
                       <tr>
                           <td>Evaluación de Katz</td>
-                          <td><input type="text" name="evalKatzRes" value="2.43"/></td>
+                          <td><input type="text" name="evalKatzRes" value="${FG.getKartz()}"/></td>
                           <td><input type="text" name="evalKatzIntr" value="3.43"/></td>
                       </tr>
                       <tr>
@@ -122,9 +122,8 @@
                     </tbody>
                   </table>
                   </div>
-                <input type="submit" value="Guardar" class="btn btn-success" />
             </form>
-                <input type="submit" onclick="location.href='/TercerApp'" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+                <input type="submit" onclick="location.href='/TercerApp'" value="Salir" class="btn btn-primary top-buffer" />
             </body>
 
             </html>

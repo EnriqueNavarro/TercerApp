@@ -50,7 +50,9 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Pacientes.findByAutopadecimiento", query = "SELECT p FROM Pacientes p WHERE p.autopadecimiento = :autopadecimiento")
     , @NamedQuery(name = "Pacientes.findByActivo", query = "SELECT p FROM Pacientes p WHERE p.activo = :activo")
     , @NamedQuery(name = "Pacientes.findByIdFitbit", query = "SELECT p FROM Pacientes p WHERE p.idFitbit = :idFitbit")
-    , @NamedQuery(name = "Pacientes.findByIdFormulariosGenerales", query = "SELECT p FROM Pacientes p WHERE p.idFormulariosGenerales = :idFormulariosGenerales")})
+    , @NamedQuery(name = "Pacientes.findByIdFormulariosGenerales", query = "SELECT p FROM Pacientes p WHERE p.idFormulariosGenerales = :idFormulariosGenerales")
+    , @NamedQuery(name = "Pacientes.findByIdFormulariosSS", query = "SELECT p FROM Pacientes p WHERE p.idFormulariosSS = :idFormulariosSS")
+    , @NamedQuery(name = "Pacientes.findByIdFormulariosNutricionales", query = "SELECT p FROM Pacientes p WHERE p.idFormulariosNutricionales = :idFormulariosNutricionales")})
 public class Pacientes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -111,6 +113,12 @@ public class Pacientes implements Serializable {
     @Size(max = 255)
     @Column(name = "idFormulariosGenerales")
     private String idFormulariosGenerales;
+    @Size(max = 255)
+    @Column(name = "idFormulariosSS")
+    private String idFormulariosSS;
+    @Size(max = 255)
+    @Column(name = "idFormulariosNutricionales")
+    private String idFormulariosNutricionales;
     @JoinColumn(name = "id_grafica", referencedColumnName = "id")
     @ManyToOne
     private Graficas idGrafica;
@@ -284,6 +292,22 @@ public class Pacientes implements Serializable {
 
     public void setIdFormulariosGenerales(String idFormulariosGenerales) {
         this.idFormulariosGenerales = idFormulariosGenerales;
+    }
+
+    public String getIdFormulariosSS() {
+        return idFormulariosSS;
+    }
+
+    public void setIdFormulariosSS(String idFormulariosSS) {
+        this.idFormulariosSS = idFormulariosSS;
+    }
+
+    public String getIdFormulariosNutricionales() {
+        return idFormulariosNutricionales;
+    }
+
+    public void setIdFormulariosNutricionales(String idFormulariosNutricionales) {
+        this.idFormulariosNutricionales = idFormulariosNutricionales;
     }
 
     public Graficas getIdGrafica() {

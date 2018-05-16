@@ -100,6 +100,7 @@
                                         </div>
                                     </div>
                                 <input type="submit" value="Modificar" id="" class="btn btn-info">
+                                <button type="button" class="btn btn-outline-primary" id="generarReporteID">Generar Reporte</button>
                             </form>
                         </div>
                     </div>

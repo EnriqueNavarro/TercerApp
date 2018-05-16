@@ -28,12 +28,6 @@
                 <form method="post" action="evaluacionGeriatricaSubmit">
                 <div class="container ">
                     <h1 class="well">Evaluación geriátrica del paciente</h1>
-                    <div class="row">
-                        <div class="col-4">
-                          <label>Paciente:</label>
-                            <input type="text" placeholder="id" class="form-control" id="pacienteID" name="pacienteid" >
-                        </div>
-                    </div>
                     <table class="table table-striped table-hover table-bordered">
                     <thead>
                       <tr>
@@ -43,6 +37,7 @@
                       </tr>
                     </thead>
                     <tbody>
+             <input type="hidden" value="${Paciente.getId()}" class="form-control" id="pacienteID" name="pacienteid" >
                       <tr>
                           <td>Evaluación de Katz</td>
                           <td><input type="text" name="evalKatzRes" value="2.43"/></td>

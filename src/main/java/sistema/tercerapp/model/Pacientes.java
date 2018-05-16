@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author Kenyiro
+ * @author Francisco
  */
 @Entity
 @Table(name = "pacientes")
@@ -49,7 +49,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Pacientes.findByEscalaAMAI", query = "SELECT p FROM Pacientes p WHERE p.escalaAMAI = :escalaAMAI")
     , @NamedQuery(name = "Pacientes.findByAutopadecimiento", query = "SELECT p FROM Pacientes p WHERE p.autopadecimiento = :autopadecimiento")
     , @NamedQuery(name = "Pacientes.findByActivo", query = "SELECT p FROM Pacientes p WHERE p.activo = :activo")
-    , @NamedQuery(name = "Pacientes.findByIdFitbit", query = "SELECT p FROM Pacientes p WHERE p.idFitbit = :idFitbit")})
+    , @NamedQuery(name = "Pacientes.findByIdFitbit", query = "SELECT p FROM Pacientes p WHERE p.idFitbit = :idFitbit")
+    , @NamedQuery(name = "Pacientes.findByIdFormulariosGenerales", query = "SELECT p FROM Pacientes p WHERE p.idFormulariosGenerales = :idFormulariosGenerales")})
 public class Pacientes implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -107,6 +108,9 @@ public class Pacientes implements Serializable {
     private Boolean activo;
     @Column(name = "id_Fitbit")
     private Integer idFitbit;
+    @Size(max = 255)
+    @Column(name = "idFormulariosGenerales")
+    private String idFormulariosGenerales;
     @JoinColumn(name = "id_grafica", referencedColumnName = "id")
     @ManyToOne
     private Graficas idGrafica;
@@ -272,6 +276,14 @@ public class Pacientes implements Serializable {
 
     public void setIdFitbit(Integer idFitbit) {
         this.idFitbit = idFitbit;
+    }
+
+    public String getIdFormulariosGenerales() {
+        return idFormulariosGenerales;
+    }
+
+    public void setIdFormulariosGenerales(String idFormulariosGenerales) {
+        this.idFormulariosGenerales = idFormulariosGenerales;
     }
 
     public Graficas getIdGrafica() {

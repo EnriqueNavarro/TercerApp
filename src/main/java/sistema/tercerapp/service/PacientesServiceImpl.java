@@ -5,11 +5,13 @@
  */
 package sistema.tercerapp.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sistema.tercerapp.dao.PacienteDao;
+import sistema.tercerapp.model.Formulariogeneral;
 import sistema.tercerapp.model.Pacientes;
 
 /**
@@ -22,6 +24,9 @@ public class PacientesServiceImpl implements PacientesService{
 
    @Autowired
     private PacienteDao dao;
+   
+   @Autowired
+   FormulariogeneralService fgService;
 
     @Override
     public Pacientes findById(int id) {
@@ -52,7 +57,7 @@ public class PacientesServiceImpl implements PacientesService{
            entity.setCohabitacion(pa.getCohabitacion());
            entity.setTelefono(pa.getTelefono());
            entity.setLastUpdated(pa.getLastUpdated());
-             //actualizar formulario
+           entity.setIdFormulariosGenerales(pa.getIdFormulariosGenerales());
         }            
     }
 
@@ -65,5 +70,22 @@ public class PacientesServiceImpl implements PacientesService{
     public List<Pacientes> findAllPacientes() {
         return dao.findAll();
     }
+
+    @Override
+    public List<Formulariogeneral> findFGbyPacienteId(int id) {
+       Pacientes entity= dao.findById(id);
+       if(entity != null){
+        String[] fg = entity.getIdFormulariosGenerales().split("-");
+        List<Formulariogeneral> fgList = new ArrayList<Formulariogeneral>();
+        for(int i = 0; i<fg.length; i++){
+        fgList.add(fgService.findById(Integer.parseInt(fg[i])));
+        }
+                return fgList;
+       }
+                return null;
+
+    }
+    
+
     
 }

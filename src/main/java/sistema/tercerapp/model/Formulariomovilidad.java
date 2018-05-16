@@ -33,13 +33,14 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "formulariomovilidad")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Formulariomovilidad.findAll", query = "SELECT f FROM Formulariomovilidad f"),
-    @NamedQuery(name = "Formulariomovilidad.findById", query = "SELECT f FROM Formulariomovilidad f WHERE f.id = :id"),
-    @NamedQuery(name = "Formulariomovilidad.findByCreacion", query = "SELECT f FROM Formulariomovilidad f WHERE f.creacion = :creacion"),
-    @NamedQuery(name = "Formulariomovilidad.findByLastUpdated", query = "SELECT f FROM Formulariomovilidad f WHERE f.lastUpdated = :lastUpdated"),
-    @NamedQuery(name = "Formulariomovilidad.findByNombre", query = "SELECT f FROM Formulariomovilidad f WHERE f.nombre = :nombre"),
-    @NamedQuery(name = "Formulariomovilidad.findByEdad", query = "SELECT f FROM Formulariomovilidad f WHERE f.edad = :edad"),
-    @NamedQuery(name = "Formulariomovilidad.findByFecha", query = "SELECT f FROM Formulariomovilidad f WHERE f.fecha = :fecha")})
+    @NamedQuery(name = "Formulariomovilidad.findAll", query = "SELECT f FROM Formulariomovilidad f")
+    , @NamedQuery(name = "Formulariomovilidad.findById", query = "SELECT f FROM Formulariomovilidad f WHERE f.id = :id")
+    , @NamedQuery(name = "Formulariomovilidad.findByCreacion", query = "SELECT f FROM Formulariomovilidad f WHERE f.creacion = :creacion")
+    , @NamedQuery(name = "Formulariomovilidad.findByLastUpdated", query = "SELECT f FROM Formulariomovilidad f WHERE f.lastUpdated = :lastUpdated")
+    , @NamedQuery(name = "Formulariomovilidad.findByNombre", query = "SELECT f FROM Formulariomovilidad f WHERE f.nombre = :nombre")
+    , @NamedQuery(name = "Formulariomovilidad.findByEdad", query = "SELECT f FROM Formulariomovilidad f WHERE f.edad = :edad")
+    , @NamedQuery(name = "Formulariomovilidad.findByFecha", query = "SELECT f FROM Formulariomovilidad f WHERE f.fecha = :fecha")
+    , @NamedQuery(name = "Formulariomovilidad.findByPacienteId", query = "SELECT f FROM Formulariomovilidad f WHERE f.pacienteId = :pacienteId")})
 public class Formulariomovilidad implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -70,6 +71,10 @@ public class Formulariomovilidad implements Serializable {
     @Column(name = "fecha")
     @Temporal(TemporalType.DATE)
     private Date fecha;
+    @Basic(optional = false)
+    @NotNull
+    @Column(name = "paciente_id")
+    private int pacienteId;
     @OneToMany(mappedBy = "idformularioMovilidad")
     private Collection<Pacientes> pacientesCollection;
 
@@ -80,12 +85,13 @@ public class Formulariomovilidad implements Serializable {
         this.id = id;
     }
 
-    public Formulariomovilidad(Integer id, Date creacion, String nombre, int edad, Date fecha) {
+    public Formulariomovilidad(Integer id, Date creacion, String nombre, int edad, Date fecha, int pacienteId) {
         this.id = id;
         this.creacion = creacion;
         this.nombre = nombre;
         this.edad = edad;
         this.fecha = fecha;
+        this.pacienteId = pacienteId;
     }
 
     public Integer getId() {
@@ -134,6 +140,14 @@ public class Formulariomovilidad implements Serializable {
 
     public void setFecha(Date fecha) {
         this.fecha = fecha;
+    }
+
+    public int getPacienteId() {
+        return pacienteId;
+    }
+
+    public void setPacienteId(int pacienteId) {
+        this.pacienteId = pacienteId;
     }
 
     @XmlTransient

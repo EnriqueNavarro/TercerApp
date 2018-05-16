@@ -35,14 +35,17 @@ public class AppController {
     
         @Autowired
     UsuariosService usuarioService;
+    
         @Autowired
-        PacientesService pacienteService;
+    PacientesService pacienteService;
+    
         @Autowired
-        FormulariogeneralService fgService;
+    FormulariogeneralService fgService;
         
-                @Autowired
-        FormulariossService formulariosSSService;
-            private boolean user= false;
+        @Autowired
+    FormulariossService formulariosSSService;
+            
+    private boolean user= false;
 
     
     @RequestMapping(value = {"/"})
@@ -60,6 +63,29 @@ public class AppController {
     public String showRegistrarPage(ModelMap model) {
         return "RegistrarUsuario";
     }
+    
+    @RequestMapping(value = {"/verPacientesC"},method = RequestMethod.GET)
+	public String verPacientesC(Model model) {
+
+                List<Formulariogeneral> fg = fgService.findAllFormularioGeneral();
+
+		List<Pacientes> pacientes = pacienteService.findAllPacientes();
+
+                
+                
+                List<String> pacientesLista = new ArrayList<String>();
+                        
+               int j = pacientes.size();
+
+               for(int i = 0;i<pacientes.size();i++){
+                    if(pacienteService.findFGbyPacienteId(pacientes.get(i).getId()) != null && pacienteService.findById(pacientes.get(i).getId()) != null){
+                    model.addAttribute("Paciente"+pacientes.get(i).getId(), pacienteService.findFGbyPacienteId(pacientes.get(i).getId()));
+                    }
+                }
+                
+                model.addAttribute("Pacientes", pacientes);	
+                return "verPacientesC";
+	}
     
     	@RequestMapping(value = {"/modificarUsuarioC"},method = RequestMethod.GET)
 	public String initForm(Model model) {
@@ -102,12 +128,15 @@ public class AppController {
         Usuarios user = usuarioService.findById(id);
         
         model.addAttribute("usuario", user);
-        
         return "ModificarUsuario";
     }
     
-    @RequestMapping(value = {"/verPaciente"})
-    public String showVerPacientePage(ModelMap model) {
+    @RequestMapping(value = {"/verPaciente"}, method = RequestMethod.GET)
+    public String showVerPacientePage(@RequestParam("idPaciente") int idPaciente, ModelMap model) {
+        
+        Pacientes p = pacienteService.findById(idPaciente);
+        model.addAttribute("Paciente", p);
+        
         return "VerPaciente";
     }
     
@@ -116,8 +145,12 @@ public class AppController {
         return "ResultadosFitbit";
     }
     
-    @RequestMapping(value = {"/EvaluacionGeriatrica"})
-    public String showEvaluacionGeriatrica(ModelMap model) {
+    @RequestMapping(value = {"/EvaluacionGeriatrica"}, method = RequestMethod.GET)
+    public String showEvaluacionGeriatrica(@RequestParam("idPaciente") int idPaciente,ModelMap model) {
+        
+        Pacientes p = pacienteService.findById(idPaciente);
+        model.addAttribute("Paciente", p);
+        
         return "EvaluacionGeriatrica";
     }
     
@@ -142,7 +175,7 @@ public class AppController {
     }
     
     @RequestMapping( value = "/evaluacionGeriatricaSubmit", method=RequestMethod.POST)
-    public String guardarEvaluacionGeriatrica(@RequestParam(value="pacienteid", required=false) int Id,
+    public String guardarEvaluacionGeriatrica(
             @RequestParam(value="evalKatzRes") String evalKatzRes,@RequestParam(value="evalKatzIntr") String evalKatzIntr,
             @RequestParam(value="escalaBorthelRes") String escalaBorthelRes, @RequestParam(value="escalaBorthelIntr") String escalaBorthelIntr, 
             @RequestParam(value="lawtonRes") String lawtonRes,@RequestParam(value="lawtonIntr") String lawtonIntr, 
@@ -156,10 +189,15 @@ public class AppController {
             @RequestParam(value="velocidadDeMarchaRes") String velocidadDeMarchaRes, @RequestParam(value="velocidadDeMarchaIntr") String velocidadDeMarchaIntr,
             @RequestParam(value="debilitamientoRes") String debilitamientoRes, @RequestParam(value="debilitamientoIntr") String debilitamientoIntr,
             @RequestParam(value="actividadFisicaRes") String actividadFisicaRes, @RequestParam(value="actividadFisicaIntr") String actividadFisicaIntr,
-            @RequestParam(value="diagnosticoRes") String diagnosticoRes, @RequestParam(value="diagnosticoIntr") String diagnosticoIntr,
+            @RequestParam(value="diagnosticoRes") String diagnosticoRes, @RequestParam(value="diagnosticoIntr") String diagnosticoIntr, 
+            @RequestParam(value="pacienteid") int pacienteid,
             ModelMap model){
         
+        Pacientes p = pacienteService.findById(pacienteid);
+        
         Formulariogeneral fg = new Formulariogeneral();
+        
+        fg.setPacienteId(pacienteid);
         
         if(evalKatzRes != null){
             fg.setKartz(evalKatzRes);
@@ -201,9 +239,28 @@ public class AppController {
             fg.setDiagnostico(diagnosticoRes);
         }
         
-        fg.setPacienteId(Id);
-        
+        fg.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
+        fg.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
         fgService.saveFormularioGeneral(fg);
+        
+        if(p.getIdFormulariosGenerales() != null){
+        StringBuilder sb = new StringBuilder(p.getIdFormulariosGenerales());
+        String idFg = String.valueOf(fg.getId());
+        sb.append("-"+idFg); //0 no contara
+        String idString = sb.toString();
+   
+        p.setIdFormulariosGenerales(idString);
+        pacienteService.updatePacientes(p);
+        }else{
+        StringBuilder sb = new StringBuilder();
+        String idFg = String.valueOf(fg.getId());
+        sb.append(idFg);
+        String idString = sb.toString();
+   
+        p.setIdFormulariosGenerales(idString);
+        pacienteService.updatePacientes(p);
+        }
+        
         
          if(user){
                     return "usuarioDashboard";
@@ -310,13 +367,11 @@ public class AppController {
         
         pacienteService.savePacientes(p);
         
-        if(user){
-                    return "usuarioDashboard";
-
-        }else{
-                    return "adminDashboard";
-
-        }
+            if(user){
+                return "usuarioDashboard";
+            }else{
+                return "adminDashboard";
+            }
     }
     
       @RequestMapping(value = {"/ModificarPaciente"})
@@ -324,15 +379,23 @@ public class AppController {
         return "ModificarPaciente";
     }
     
-    @RequestMapping(value ="/pacienteModificado", method = RequestMethod.POST)
-    public String modificarPaciente(@RequestParam(value="pacienteid", required=false) int Id, @RequestParam( value ="nombre", required = false) String nombre,
-        @RequestParam(value="aPaterno", required=false) String aPaterno, @RequestParam(value="afiliacionMedica", required=false) String afiMed,
-        @RequestParam(value="escolaridadMax", required=false) String escolaridadMax, @RequestParam(value= "aMaterno", required=false) String aMaterno, 
-        @RequestParam(value= "email", required=false) String email, @RequestParam(value="edad", required=false) String edad,
-        @RequestParam(value="autoreportePadecimientos", required=false) String autoreportePadecimientos, @RequestParam(value="estado", required=false) int estado,
-        @RequestParam(value="escalaAMAI", required=false) String escalaAMAI, @RequestParam(value="estadoCivil", required=false) String estadoCivil,
-        @RequestParam(value="cohabitacion", required=false) int cohabitacion, @RequestParam(value="telefono", required=false) String telefono,
-        @RequestParam(value="domicilio", required=false) String domicilio, ModelMap model){
+          @RequestMapping(value = {"/pacienteModificado"}, method = RequestMethod.POST)
+    public String modificarPaciente2(@RequestParam( value ="nombre", required = false) String nombre, 
+        @RequestParam( value ="aPaterno", required = false) String aPaterno,
+        @RequestParam(value="pacienteid", required=false) int Id,
+        @RequestParam( value ="aMaterno", required = false) String aMaterno,
+        @RequestParam( value ="email", required = false) String email,
+        @RequestParam( value ="edad", required = false) String edad,
+        @RequestParam( value ="estadoCivil", required = false) String estadoCivil,
+        @RequestParam( value ="escolaridadMax", required = false) String escolaridadMax,
+        @RequestParam( value ="cohabitacion", required = false) String cohabitacion,
+        @RequestParam( value ="escalaAMAI", required = false) String escalaAMAI,
+        @RequestParam( value ="autoreportePadecimientos", required = false) String autoreportePadecimientos,
+        @RequestParam( value ="telefono", required = false) String telefono,
+        @RequestParam( value ="direccion", required = false) String direccion,
+        @RequestParam( value ="afiliacionMedica", required = false) String afiliacionMedica,
+
+       ModelMap model) {
         
         Pacientes p = pacienteService.findById(Id);
         
@@ -342,12 +405,7 @@ public class AppController {
         if(aPaterno != null){
             p.setApellidoPaterno(aPaterno);
         }
-        if(afiMed != null){
-            p.setAfiliacion(afiMed);
-        }
-        if(escolaridadMax != null){
-            p.setEscolaridad(escolaridadMax);
-        }
+        
         if(aMaterno != null){
             p.setApellidoMaterno(aMaterno);
         }
@@ -357,6 +415,25 @@ public class AppController {
         if(edad != null){
             p.setEdad(edad);
         }
+                if(estadoCivil != null){
+            p.setEstadoCivil(estadoCivil);
+        }
+        if(escolaridadMax != null){
+            p.setEscolaridad(escolaridadMax);
+        }
+        
+        if(cohabitacion.equals("true")){
+            p.setCohabitacion(true);
+        }else{p.setCohabitacion(false);}
+         
+
+        if(afiliacionMedica != null){
+            p.setAfiliacion(afiliacionMedica);
+        }
+        if(escolaridadMax != null){
+            p.setEscolaridad(escolaridadMax);
+        }
+        
         if(autoreportePadecimientos != null){
             p.setAutopadecimiento(autoreportePadecimientos);
         }
@@ -369,29 +446,22 @@ public class AppController {
         if(telefono != null){
             p.setTelefono(telefono);
         }
-        if(domicilio != null){
-            p.setDireccion(domicilio);
+        if(direccion != null){
+            p.setDireccion(direccion);
         }
-         if(cohabitacion == 1){
-            p.setCohabitacion(true);
-        }else{p.setCohabitacion(false);}
-         
-         if(estado == 0){
-            p.setActivo(true);
-        }else{p.setActivo(false);}
-        
+      
          p.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
                 
         pacienteService.updatePacientes(p);
         
         
-        if(user){
+            if(user){
                     return "usuarioDashboard";
-
-        }else{
+            }else{
                     return "adminDashboard";
+            }        }
+    
 
-        }    }
     
     @RequestMapping(value = {"/EliminarPaciente"})
     public String showEliminarPaciente(ModelMap model) {
@@ -431,13 +501,12 @@ public class AppController {
                 
         usuarioService.saveUsuarios(u);
 
-        if(user){
-                    return "usuarioDashboard";
-
-        }else{
-                    return "adminDashboard";
-
-        }    }
+            if(user){
+                return "usuarioDashboard";
+            }else{
+                return "adminDashboard";
+            }    
+    }
     
     @RequestMapping(value = "/usuarioModificado", method = RequestMethod.POST)
     public String completeModification(@RequestParam( value ="nombre", required = false) String nombre, @RequestParam( value ="domicilio", required = false) String domicilio, 
@@ -493,6 +562,6 @@ public class AppController {
         }else{
                     return "adminDashboard";
 
-        }    }
-
+        }    
+    }
 }

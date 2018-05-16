@@ -33,15 +33,11 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "graficas")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Graficas.findAll", query = "SELECT g FROM Graficas g"),
-    @NamedQuery(name = "Graficas.findById", query = "SELECT g FROM Graficas g WHERE g.id = :id"),
-    @NamedQuery(name = "Graficas.findByCreacion", query = "SELECT g FROM Graficas g WHERE g.creacion = :creacion"),
-    @NamedQuery(name = "Graficas.findByLastUpdated", query = "SELECT g FROM Graficas g WHERE g.lastUpdated = :lastUpdated")})
+    @NamedQuery(name = "Graficas.findAll", query = "SELECT g FROM Graficas g")
+    , @NamedQuery(name = "Graficas.findById", query = "SELECT g FROM Graficas g WHERE g.id = :id")
+    , @NamedQuery(name = "Graficas.findByCreacion", query = "SELECT g FROM Graficas g WHERE g.creacion = :creacion")
+    , @NamedQuery(name = "Graficas.findByLastUpdated", query = "SELECT g FROM Graficas g WHERE g.lastUpdated = :lastUpdated")})
 public class Graficas implements Serializable {
-
-    @Lob
-    @Column(name = "imgData")
-    private byte[] imgData;
 
     private static final long serialVersionUID = 1L;
     @Id
@@ -59,6 +55,9 @@ public class Graficas implements Serializable {
     @Column(name = "lastUpdated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
+    @Lob
+    @Column(name = "imgData")
+    private byte[] imgData;
     @OneToMany(mappedBy = "idGrafica")
     private Collection<Pacientes> pacientesCollection;
 
@@ -99,6 +98,13 @@ public class Graficas implements Serializable {
         this.lastUpdated = lastUpdated;
     }
 
+    public byte[] getImgData() {
+        return imgData;
+    }
+
+    public void setImgData(byte[] imgData) {
+        this.imgData = imgData;
+    }
 
     @XmlTransient
     public Collection<Pacientes> getPacientesCollection() {
@@ -132,14 +138,6 @@ public class Graficas implements Serializable {
     @Override
     public String toString() {
         return "sistema.tercerapp.model.Graficas[ id=" + id + " ]";
-    }
-
-    public byte[] getImgData() {
-        return imgData;
-    }
-
-    public void setImgData(byte[] imgData) {
-        this.imgData = imgData;
     }
     
 }

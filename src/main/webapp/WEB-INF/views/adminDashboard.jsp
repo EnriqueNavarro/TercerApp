@@ -178,8 +178,8 @@
                                 
                 $('#verPacienteID').click(function() {
                     $.ajax({
-                        type: 'POST',
-                        url: '${pageContext.request.contextPath}/verPaciente',
+                        type: 'GET',
+                        url: '${pageContext.request.contextPath}/verPacientesC',
                                         success: function(result) {
                                             $('#infoScreen').html(result);
                                             

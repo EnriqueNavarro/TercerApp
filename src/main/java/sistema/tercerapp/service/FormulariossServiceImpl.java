@@ -37,7 +37,6 @@ public class FormulariossServiceImpl implements FormulariossService{
     public void updateFormularioss(Formularioss fm) {
     Formularioss entity = dao.findById(fm.getId());
         if(entity!=null){
-            entity.setNombre(fm.getNombre()); //actualizar formulario
 
         }      
     }

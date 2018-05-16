@@ -6,6 +6,7 @@
 package sistema.tercerapp.service;
 
 import java.util.List;
+import sistema.tercerapp.model.Formulariogeneral;
 import sistema.tercerapp.model.Pacientes;
 
 /**
@@ -23,5 +24,7 @@ public interface PacientesService {
     void deletePacientes(int id);
 
     List<Pacientes> findAllPacientes();
+    
+    List<Formulariogeneral> findFGbyPacienteId(int id);
     
 }

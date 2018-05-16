@@ -98,13 +98,6 @@
           </a>
         </li>
         
-
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="generar_reporte">
-            <a class="nav-link" href="#" id="generarReporteID">
-            <i class="fa fa-fw fa fa-clipboard"></i>
-            <span class="nav-link-text">Generar Reporte</span>
-          </a>
-        </li>
         
       <!--<a class="btn btn-primary" href="#" id="toggleNavColor">Tema</a>-->
 

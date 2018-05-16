@@ -33,57 +33,57 @@
                         <tr>
                           <td>Peso</td>
                           <td><input type="text" name="w" value="${Formulario.getPeso()}"/>${Formulario.getPeso()}</td>
-                          <td><input type="text" name="iw" value="Interpretación"/></td>
+                          <td><input type="text" name="iw" value="Interpretación"/>${Formulario.getIntPeso()}</td>
                       </tr>
                       <tr>
                           <td>Electrolitos</td>
-                          <td><input type="text" name="e" value="2.43"/></td>
-                          <td><input type="text" name="ie" value="Interpretación"/></td>
+                          <td><input type="text" name="e" value=""/>${Formulario.getElectrolitos()}</td>
+                          <td><input type="text" name="ie" value="Interpretación"/>${Formulario.getIntElectrolitos()}</td>
                       </tr>
                       <tr>
                           <td>Albumina</td>
-                          <td><input type="text" name="a" value="2.43"/></td>
-                          <td><input type="text" name="ia" value="Interpretación"/></td>
+                          <td><input type="text" name="a" value=""/>${Formulario.getAlbumina()}</td>
+                          <td><input type="text" name="ia" value="Interpretación"/>${Formulario.getIntAlbumina()}</td>
                       </tr>
                       <tr>
                           <td>Indice de masa corporal</td>
-                          <td><input type="text" name="imc" value="2.43"/></td>
-                          <td><input type="text" name="iimc" value="Interpretación"/></td>
+                          <td><input type="text" name="imc" value=""/>${Formulario.getImc()}</td>
+                          <td><input type="text" name="iimc" value=""/>${Formulario.getIntIMC()}</td>
                       </tr>
                       <tr>
                           <td>Diametro de brazo</td>
-                          <td><input type="text" name="db" value="2.43"/></td>
-                          <td><input type="text" name="idb" value="Interpretación"/></td>
+                          <td><input type="text" name="db" value=""/>${Formulario.getDiametroBrazo()}</td>
+                          <td><input type="text" name="idb" value=""/>${Formulario.getIntDiametroBrazo()}</td>
                       </tr>
                       <tr>
                           <td>Diametro de pierna</td>
-                          <td><input type="text" name="dp" value="2.43"/></td>
-                          <td><input type="text" name="idp" value="Interpretación"/></td>
+                          <td><input type="text" name="dp" value=""/>${Formulario.getDiametroPierna()}</td>
+                          <td><input type="text" name="idp" value=""/>${Formulario.getIntDiametroPierna()}</td>
                       </tr>
                       <tr>
                           <td>Diametro de abdomen</td>
-                          <td><input type="text" name="da" value="2.43"/></td>
-                          <td><input type="text" name="ida" value="Interpretación"/></td>
+                          <td><input type="text" name="da" value=""/>${Formulario.getDiametroAbdomen()}</td>
+                          <td><input type="text" name="ida" value=""/>${Formulario.getIntDiametroAbdomen()}</td>
                       </tr>
                       <tr>
                           <td>Presion</td>
-                          <td><input type="text" name="p" value="2.43"/></td>
-                          <td><input type="text" name="ip" value="Interpretación"/></td>
+                          <td><input type="text" name="p" value=""/>${Formulario.getPresion()}</td>
+                          <td><input type="text" name="ip" value=""/>${Formulario.getIntPresion()}</td>
                       </tr>
                       <tr>
                           <td>BH</td>
-                          <td><input type="text" name="bh" value="2.43"/></td>
-                          <td><input type="text" name="ibh" value="Interpretación"/></td>
+                          <td><input type="text" name="bh" value=""/>${Formulario.getBh()}</td>
+                          <td><input type="text" name="ibh" value=""/>${Formulario.getIntBH()}</td>
                       </tr>
                       <tr>
                           <td>Glucosa</td>
-                          <td><input type="text" name="g" value="2.43"/></td>
-                          <td><input type="text" name="ig" value="Interpretación"/></td>
+                          <td><input type="text" name="g" value=""/>${Formulario.getGlucosa()}</td>
+                          <td><input type="text" name="ig" value=""/>${Formulario.getIntGlucosa()}</td>
                       </tr>
                       <tr>
                           <td>Lipidos</td>
-                          <td><input type="text" name="l" value="2.43"/></td>
-                          <td><input type="text" name="il" value="Interpretación"/></td>
+                          <td><input type="text" name="l" value=""/>${Formulario.getLipidos()}</td>
+                          <td><input type="text" name="il" value=""/>${Formulario.getIntLipidos()}</td>
                       </tr>
                     </tbody>
                   </table>

@@ -33,7 +33,7 @@
                         <th scope="row">1</th>
                         <td colspan="2">Dispositivos en uso </td>
                         <td colspan="2"><input type="text" name="dU" value="${Formulario.getDispositivos()}"/>${Formulario.getDispositivos()}</td>
-                        <input type="hidden" value="${Formulario.getId()}" class="form-control" id="nombreCompletoID" name="pacienteid" >${Formulario.getId()}
+                        <input type="hidden" value="${Formulario.getId()}" class="form-control" id="nombreCompletoID" name="pacienteid" ><!--${Formulario.getId()}-->
                       </tr>
                       <tr>
                         <th scope="row">2</th>

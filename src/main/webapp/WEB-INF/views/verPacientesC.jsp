@@ -120,6 +120,17 @@
                                         }
                                     });
                                 });
+                                
+                    $('.verHistorialNutricional').click(function() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '${pageContext.request.contextPath}/verHistorialNutricional?idNutricional='+selectedIdAnswer,
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+                                        }
+                                    });
+                                });
                     $('.datosGerontologicos').click(function() {
                     $.ajax({
                         type: 'GET',
@@ -191,6 +202,7 @@
                         </div>
                         </td>
                         <td>
+                            <button type="button" class="btn btn-outline-warning verHistorialNutricional" id="verHistorialGerontologicoID" onclick="setValue(${p.getId()})">Historial</button>
                             <button type="button" class="btn btn-outline-primary datosNutricionales" id="evalNutricional" onclick="setValue(${p.getId()})">Crear</button>
                         </td>
                         </tr>

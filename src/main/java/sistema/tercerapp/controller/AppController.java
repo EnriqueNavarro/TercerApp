@@ -122,6 +122,15 @@ public class AppController {
         return "verValoracionGerontologica";
     }
     
+        @RequestMapping(value = {"/verReporteNutricional"}, method = RequestMethod.GET)
+    public String showReporteNutricional(@RequestParam("idNutricional") int idNutricional, ModelMap model) {
+        
+        Formularionutricion fn = NService.findById(idNutricional);
+        model.addAttribute("Formulario", fn);
+        
+        return "verReporteNutricional";
+    }
+    
     	@RequestMapping(value = {"/modificarUsuarioC"},method = RequestMethod.GET)
 	public String initForm(Model model) {
 		Usuarios usuario= new Usuarios();
@@ -361,6 +370,25 @@ public class AppController {
         model.addAttribute("Paciente", p);
         
         return "HistorialGerontologico";
+    }
+    
+        @RequestMapping(value = {"/verHistorialNutricional"}, method = RequestMethod.GET)
+    public String showHistorialNutricional(@RequestParam("idNutricional") int idPaciente,ModelMap model) {
+        
+        Pacientes p = pacienteService.findById(idPaciente);
+                
+        String[] formularios = p.getIdFormulariosSS().split("-");
+        
+        List<Formularionutricion> fn = new ArrayList<Formularionutricion>();
+        
+        for(int i = 0; i<formularios.length;i++){
+            fn.add(NService.findById(Integer.parseInt(formularios[i])));
+        }
+        
+        model.addAttribute("Formularios", fn);
+        model.addAttribute("Paciente", p);
+        
+        return "HistorialNutricional";
     }
     
     @RequestMapping(value = {"/EvaluacionNutricional"})

@@ -45,4 +45,7 @@
                         </div>
                     </div>
                 </div>
+            <a href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22CSMG&redirect_uri=http://localhost:8080/TercerApp/fitbit?userId=&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800">Login to Fitbit</a>
+            
+            <script src="auth0info.js"></script>
             </body>

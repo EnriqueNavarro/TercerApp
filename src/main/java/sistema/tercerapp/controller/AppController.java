@@ -119,6 +119,11 @@ public class AppController {
     public String showResultadosFitbit(ModelMap model) {
         return "ResultadosFitbit";
     }
+    @RequestMapping(value = {"/fitbit"})
+    public String showFitbit(ModelMap model) {
+        //model.addAttribute("UserId", userId);
+        return "Fitbit";
+    }
     
     @RequestMapping(value = {"/EvaluacionGeriatrica"})
     public String showEvaluacionGeriatrica(ModelMap model) {

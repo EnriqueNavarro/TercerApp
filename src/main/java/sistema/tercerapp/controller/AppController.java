@@ -18,10 +18,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import sistema.tercerapp.model.Usuarios;
 import sistema.tercerapp.model.Pacientes;
 import sistema.tercerapp.model.Formulariogeneral;
+import sistema.tercerapp.model.Formularionutricion;
 import sistema.tercerapp.model.Formularioss;
 import sistema.tercerapp.service.UsuariosService;
 import sistema.tercerapp.service.PacientesService;
 import sistema.tercerapp.service.FormulariogeneralService;
+import sistema.tercerapp.service.FormularionutricionService;
 import sistema.tercerapp.service.FormulariossService;
 
 
@@ -44,6 +46,9 @@ public class AppController {
         
         @Autowired
     FormulariossService formulariosSSService;
+        
+                @Autowired
+        FormularionutricionService NService;
             
     private boolean user= false;
 
@@ -145,6 +150,135 @@ public class AppController {
         
         model.addAttribute("usuario", user);
         return "ModificarUsuario";
+    }
+    
+    @RequestMapping(value = "/evaluacionNutricionalSubmit", method = RequestMethod.POST)
+    public String comepleteEvaluacionNutricionalSubmit(@RequestParam( value ="w", required = false) String peso, 
+            @RequestParam( value ="iw", required = false) String intPeso,
+    @RequestParam( value="e") String electrolitos,  @RequestParam("ie") String intElectrolitos, 
+    @RequestParam("a") String albumina,  @RequestParam("ia") String intAlbumina, @RequestParam("imc") String imc,
+    @RequestParam("iimc") String intImc,@RequestParam("db") String diamBrazo,@RequestParam("idb") String intDiamBrazo,
+    @RequestParam("dp") String diamPierna, @RequestParam("idp") String intDiamPierna,@RequestParam("da") String diamAbdomen,
+    @RequestParam("ida") String intDiamAbdomen,@RequestParam("p") String presion,@RequestParam("ip") String intPresion,
+    @RequestParam("bh") String BH,@RequestParam("ibh") String intBH,@RequestParam("g") String glucosa,
+    @RequestParam("ig") String intGlucosa,@RequestParam("l") String lipidos,@RequestParam("il") String intLipidos,
+    @RequestParam("pacienteid") int idPaciente,
+    ModelMap model) {
+             
+        Formularionutricion fss = new Formularionutricion();
+        
+        Pacientes p = pacienteService.findById(idPaciente);
+        
+        fss.setPacienteId(idPaciente);
+        
+        if(intLipidos != null){
+            fss.setIntLipidos(intLipidos);
+        }
+        if(lipidos != null){
+            fss.setLipidos(Double.parseDouble(lipidos));
+        }
+        if(intGlucosa != null){
+            fss.setIntGlucosa(intGlucosa);
+        }
+        if(glucosa != null){
+            fss.setGlucosa(Double.parseDouble(glucosa));
+        }
+        if(intBH != null){
+            fss.setIntBH(intBH);
+        }
+        if(BH != null){
+            fss.setBh(Double.parseDouble(BH));
+        }
+        if(intPresion != null){
+            fss.setIntPresion(intPresion);
+        }
+        if(presion != null){
+            fss.setPresion(Double.parseDouble(presion));
+        }
+        if(intDiamAbdomen != null){
+            fss.setIntDiametroAbdomen(intDiamAbdomen);
+        }
+        if(diamAbdomen != null){
+            fss.setDiametroAbdomen(Double.parseDouble(diamAbdomen));
+        }
+        if(intDiamPierna != null){
+            fss.setIntDiametroPierna(intDiamPierna);
+        }
+        if(diamPierna != null){
+            fss.setDiametroPierna(Double.parseDouble(diamPierna));
+        }
+        if(intDiamBrazo != null){
+            fss.setIntDiametroBrazo(intDiamBrazo);
+        }
+        if(diamBrazo != null){
+            fss.setDiametroBrazo(Double.parseDouble(diamBrazo));
+        }
+        if(intImc != null){
+            fss.setIntIMC(intImc);
+        }
+        if(imc != null){
+            fss.setImc(Double.parseDouble(imc));
+        }
+        if(intAlbumina != null){
+            fss.setIntAlbumina(intAlbumina);
+        }
+        if(albumina != null){
+            fss.setAlbumina(Double.parseDouble(albumina));
+        }
+        if(intElectrolitos != null){
+            fss.setIntElectrolitos(intElectrolitos);
+        }
+        if(electrolitos != null){
+            fss.setElectrolitos(Double.parseDouble(electrolitos));
+        }
+        if(intPeso != null){
+            fss.setIntPeso(intPeso);
+        }
+        if(peso != null){
+            fss.setPeso(Double.parseDouble(peso));
+        }
+        
+        //terminar de llenar todos los campos
+        
+        fss.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
+        fss.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
+
+        NService.saveFormularionutricion(fss);
+        
+        if(p.getIdFormulariosNutricionales()!= null){
+        StringBuilder sb = new StringBuilder(p.getIdFormulariosGenerales());
+        String idFg = String.valueOf(fss.getId());
+        sb.append("-"+idFg); //0 no contara
+        String idString = sb.toString();
+   
+        p.setIdFormulariosNutricionales(idString);
+        pacienteService.updatePacientes(p);
+        }else if(p.getIdFormulariosNutricionales().equals("0") || p.getIdFormulariosNutricionales() == null){
+        StringBuilder sb = new StringBuilder();
+        String idFg = String.valueOf(fss.getId());
+        sb.append(idFg);
+        String idString = sb.toString();
+   
+        p.setIdFormulariosNutricionales(idString);
+        pacienteService.updatePacientes(p);
+        }
+
+        if(user){
+                    return "usuarioDashboard";
+
+        }else{
+                    return "adminDashboard";
+
+        }
+    }
+    
+          @RequestMapping(value = {"/crearNutricional"}, method = RequestMethod.GET)
+    public String showNutricionalC(@RequestParam(value = "idPaciente", required = false) int idPaciente,ModelMap model) {
+        
+        Pacientes p = pacienteService.findById(idPaciente);
+        
+        model.addAttribute("Paciente", p);
+        return "EvaluacionNutricional";
     }
     
     @RequestMapping(value = {"/verPaciente"}, method = RequestMethod.GET)
@@ -288,7 +422,8 @@ public class AppController {
     }
     
     @RequestMapping(value = "/evaluacionGerontologicaSubmit", method = RequestMethod.POST)
-    public String comepleteEvaluacionGerontologicaSubmit(@RequestParam(value = "pacienteid") int idPaciente, @RequestParam( value ="dU", required = false) String dispositivosUso, 
+    public String comepleteEvaluacionGerontologicaSubmit(@RequestParam( value ="dU", required = false) String dispositivosUso, 
+            @RequestParam(value = "pacienteid", required = false) int idPaciente, 
             @RequestParam( value ="dMU", required = false) String dispositivosMayorUso,
     @RequestParam( value="frecuenciaU") String frecuenciaUso,  @RequestParam("actU") String actividadesUso, 
     @RequestParam("usosFav") String usosFavorecer,  @RequestParam("apoyoSocial") String apoyoSocial, @RequestParam("actComu") String actividadesComunitarias, ModelMap model) {
@@ -319,7 +454,7 @@ public class AppController {
         if(apoyoSocial != null){
         }
                 
-                
+        fss.setPacienteId(idPaciente);
                 
         if(actividadesComunitarias != null){
         }
@@ -332,7 +467,7 @@ public class AppController {
 
         formulariosSSService.saveFormularioss(fss);
 
-        if(p.getIdFormulariosGenerales() != null){
+        if(p.getIdFormulariosSS()!= null){
         StringBuilder sb = new StringBuilder(p.getIdFormulariosSS());
         String idFg = String.valueOf(fss.getId());
         sb.append("-"+idFg); //0 no contara
@@ -340,7 +475,7 @@ public class AppController {
    
         p.setIdFormulariosSS(idString);
         pacienteService.updatePacientes(p);
-        }else{
+        }if(p.getIdFormulariosSS().equals("0") || p.getIdFormulariosSS() == null){
         StringBuilder sb = new StringBuilder();
         String idFg = String.valueOf(fss.getId());
         sb.append(idFg);

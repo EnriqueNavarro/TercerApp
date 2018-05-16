@@ -87,6 +87,18 @@
                                         }
                                     });
                                 });
+                                
+                    $('.datosNutricionales').click(function() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '${pageContext.request.contextPath}/crearNutricional?idPaciente='+selectedIdAnswer,
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });
                     $('.verResultadosF').click(function() {
                     $.ajax({
                         type: 'POST',
@@ -148,9 +160,9 @@
                         </td>
                         <td><button type="button" class="btn btn-outline-primary verResultadosF" id="resultadosFitbitID">Ver</button>
                         </td>
-                        <td><button type="button" class="btn btn-outline-primary datosGerontologicos" id="valoracionGerontologicaID">Crear</button>
+                        <td><button type="button" class="btn btn-outline-primary datosGerontologicos" id="valoracionGerontologicaID" onclick="setValue(${p.getId()})">Crear</button>
                         </td>
-                        <td><button type="button" class="btn btn-outline-primary" id="evalNutricional">Crear</button>
+                        <td><button type="button" class="btn btn-outline-primary datosNutricionales" id="evalNutricional" onclick="setValue(${p.getId()})">Crear</button>
                         </td>
                         </tr>
                     </c:forEach>

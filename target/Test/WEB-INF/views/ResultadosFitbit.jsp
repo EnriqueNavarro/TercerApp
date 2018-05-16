@@ -36,16 +36,18 @@
                     </div>
                     <div>
                         <div class="row centerData">
-                            <form method="post" action="archivoUpload" enctype="multipart/form-data">
-                            <input type="file" name="archivoFitbit" value="Archivo" size="50" />
-                            <input type="submit" value="Guardar" class="btn btn-success" />
+                            <form method="post" action="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22CSMG&redirect_uri=http://localhost:8080/TercerApp/fitbit?userId=&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800" enctype="multipart/form-data">
+                            
+                                <input type="submit" value="Ir a Fitbit" class="btn btn-success" />
                             </form>
-                            <input type="button" value="Salir" onclick="return confirm('¿Seguro que quiere salir? Su progreso se perderá')" id="btnSalirID" class="btn btn-primary">
+                            
+                            <form method="post" action="salirSinGuardar">
+                                <input type="submit" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+                            </form>
                                               
                         </div>
                     </div>
                 </div>
-            <a href="https://www.fitbit.com/oauth2/authorize?response_type=token&client_id=22CSMG&redirect_uri=http://localhost:8080/TercerApp/fitbit?userId=&scope=activity%20heartrate%20location%20nutrition%20profile%20settings%20sleep%20social%20weight&expires_in=604800">Login to Fitbit</a>
             
             <script src="auth0info.js"></script>
             </body>

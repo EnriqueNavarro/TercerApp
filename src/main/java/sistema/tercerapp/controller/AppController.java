@@ -80,7 +80,7 @@ public class AppController {
         
         model.addAttribute("FG", fg);
         
-        return "verGeriatrica";
+        return "verReporteGeriatrico";
     }
     
     @RequestMapping(value = {"/verPacientesC"},method = RequestMethod.GET)

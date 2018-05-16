@@ -43,6 +43,7 @@
                           <td>
                               <p>${FG.getCreacion()}</p>
                           </td>
+                          <td><p></p></td>
                       </tr>
                       <tr>
                           <td>Evaluación de Katz</td>

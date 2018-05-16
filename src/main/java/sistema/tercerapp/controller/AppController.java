@@ -91,13 +91,13 @@ public class AppController {
 		List<Pacientes> pacientes = pacienteService.findAllPacientes();
                 List<String> pacientesLista = new ArrayList<String>();
                         
-               int j = pacientes.size();
+               /*int j = pacientes.size();
 
                for(int i = 0;i<pacientes.size();i++){
                     if(pacienteService.findFGbyPacienteId(pacientes.get(i).getId()) != null && pacienteService.findById(pacientes.get(i).getId()) != null){
                     model.addAttribute("Paciente"+pacientes.get(i).getId(), pacienteService.findFGbyPacienteId(pacientes.get(i).getId()));
                     }
-                }
+                }*/
                 
                 model.addAttribute("Pacientes", pacientes);	
                 return "verPacientesC";
@@ -257,7 +257,7 @@ public class AppController {
    
         p.setIdFormulariosNutricionales(idString);
         pacienteService.updatePacientes(p);
-        }else if(p.getIdFormulariosNutricionales().equals("0") || p.getIdFormulariosNutricionales() == null){
+        }else{
         StringBuilder sb = new StringBuilder();
         String idFg = String.valueOf(fss.getId());
         sb.append(idFg);
@@ -312,6 +312,47 @@ public class AppController {
         
         return "EvaluacionGeriatrica";
     }
+    
+        @RequestMapping(value = {"/verHistorialGeriatrica"}, method = RequestMethod.GET)
+    public String showHistorialGeriatrico(@RequestParam("idPaciente") int idPaciente,ModelMap model) {
+        
+        Pacientes p = pacienteService.findById(idPaciente);
+        
+        List<Formulariogeneral> fg = fgService.findAllFormularioGeneral();
+        
+        String[] formularios = p.getIdFormulariosGenerales().split("-");
+        
+        List<Formulariogeneral> fgUsar = new ArrayList<Formulariogeneral>();
+        
+        for(int i = 0; i<formularios.length;i++){
+            fgUsar.add(fgService.findById(Integer.parseInt(formularios[i])));
+        }
+        
+        model.addAttribute("Formularios", fgUsar);
+        model.addAttribute("Paciente", p);
+        
+        return "HistorialGeriatrico";
+    }
+    
+    @RequestMapping(value = {"/verHistorialGerontologico"}, method = RequestMethod.GET)
+    public String showHistorialGerontologico(@RequestParam("idPaciente") int idPaciente,ModelMap model) {
+        
+        Pacientes p = pacienteService.findById(idPaciente);
+                
+        String[] formularios = p.getIdFormulariosSS().split("-");
+        
+        List<Formularioss> fgUsar = new ArrayList<Formularioss>();
+        
+        for(int i = 0; i<formularios.length;i++){
+            fgUsar.add(formulariosSSService.findById(Integer.parseInt(formularios[i])));
+        }
+        
+        model.addAttribute("Formularios", fgUsar);
+        model.addAttribute("Paciente", p);
+        
+        return "HistorialGerontologico";
+    }
+    
     @RequestMapping(value = {"/EvaluacionNutricional"})
     public String showEvaluacionNutricional(ModelMap model) {
         return "EvaluacionNutricional";
@@ -344,15 +385,15 @@ public class AppController {
             @RequestParam(value="lawtonRes") String lawtonRes,@RequestParam(value="lawtonIntr") String lawtonIntr, 
             @RequestParam(value="exMinRes") String exMinRes, @RequestParam(value="exMinIntr") String exMinIntr,
             @RequestParam(value="depresionRes") String depresionRes, @RequestParam(value="depresionIntr") String depresionIntr,
-            @RequestParam(value="cribadoRes") String cribadoRes, @RequestParam(value="cribadoIntr") String cribadoIntr,
-            @RequestParam(value="pruebaFisicoRes") String pruebaFisicoRes, @RequestParam(value="pruebaFisicoIntr") String pruebaFisicoIntr,
-            @RequestParam(value="levantateAndaRes") String levantateAndaRes, @RequestParam(value="levantateAndaIntr") String levantateAndaIntr,
-            @RequestParam(value="perdidaPesoRes") String perdidaPesoRes, @RequestParam(value="perdidaPesoIntr") String perdidaPesoIntr,
-            @RequestParam(value="pobreResistenciaYEnergiaRes") String pobreResistenciaYEnergiaRes, @RequestParam(value="pobreResistenciaYEnergiaIntr") String pobreResistenciaYEnergiaIntr,
-            @RequestParam(value="velocidadDeMarchaRes") String velocidadDeMarchaRes, @RequestParam(value="velocidadDeMarchaIntr") String velocidadDeMarchaIntr,
-            @RequestParam(value="debilitamientoRes") String debilitamientoRes, @RequestParam(value="debilitamientoIntr") String debilitamientoIntr,
-            @RequestParam(value="actividadFisicaRes") String actividadFisicaRes, @RequestParam(value="actividadFisicaIntr") String actividadFisicaIntr,
-            @RequestParam(value="diagnosticoRes") String diagnosticoRes, @RequestParam(value="diagnosticoIntr") String diagnosticoIntr, 
+            @RequestParam(value="cribadoRes", required = false) String cribadoRes, @RequestParam(value="cribadoIntr") String cribadoIntr,
+            @RequestParam(value="pruebaFisicoRes", required = false) String pruebaFisicoRes, @RequestParam(value="pruebaFisicoIntr") String pruebaFisicoIntr,
+            @RequestParam(value="levantateAndaRes", required = false) String levantateAndaRes, @RequestParam(value="levantateAndaIntr") String levantateAndaIntr,
+            @RequestParam(value="perdidaPesoRes", required = false) String perdidaPesoRes, @RequestParam(value="perdidaPesoIntr") String perdidaPesoIntr,
+            @RequestParam(value="pobreResistenciaYEnergiaRes", required = false) String pobreResistenciaYEnergiaRes, @RequestParam(value="pobreResistenciaYEnergiaIntr") String pobreResistenciaYEnergiaIntr,
+            @RequestParam(value="velocidadDeMarchaRes", required = false) String velocidadDeMarchaRes, @RequestParam(value="velocidadDeMarchaIntr") String velocidadDeMarchaIntr,
+            @RequestParam(value="debilitamientoRes", required = false) String debilitamientoRes, @RequestParam(value="debilitamientoIntr") String debilitamientoIntr,
+            @RequestParam(value="actividadFisicaRes", required = false) String actividadFisicaRes, @RequestParam(value="actividadFisicaIntr") String actividadFisicaIntr,
+            @RequestParam(value="diagnosticoRes", required = false) String diagnosticoRes, @RequestParam(value="diagnosticoIntr", required = false) String diagnosticoIntr, 
             @RequestParam(value="pacienteid") int pacienteid,
             ModelMap model){
         
@@ -495,7 +536,7 @@ public class AppController {
    
         p.setIdFormulariosSS(idString);
         pacienteService.updatePacientes(p);
-        }else if(p.getIdFormulariosSS().equals("0") || p.getIdFormulariosSS()== null){
+        }else{
         StringBuilder sb = new StringBuilder();
         String idFg = String.valueOf(fss.getId());
         sb.append(idFg);

@@ -41,7 +41,7 @@
                 
                 $('.evaluacionGeriatrica').click(function() {
                     $.ajax({
-                        type: 'GEt',
+                        type: 'GET',
                         url: '${pageContext.request.contextPath}/EvaluacionGeriatrica?idPaciente='+selectedIdAnswer,
                                         success: function(result) {
                                             $('#infoScreen').html(result);
@@ -63,11 +63,21 @@
                                         }
                                     });
                                 });
-                                
-                            $('.datosGerontologicos').click(function() {
+   $('.datosGenerales').click(function() {
                     $.ajax({
                         type: 'GET',
-                        url: '${pageContext.request.contextPath}/verGerontologicaC?idPaciente='+selectedIdAnswer,
+                        url: '${pageContext.request.contextPath}/verPaciente?idPaciente='+selectedIdAnswer,
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });                              
+                            $('.verHistorialGeriatrica').click(function() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '${pageContext.request.contextPath}/verHistorialGeriatrica?idPaciente='+selectedIdAnswer,
                                         success: function(result) {
                                             $('#infoScreen').html(result);
                                             
@@ -99,6 +109,28 @@
                                         }
                                     });
                                 });
+                                
+                    $('.verHistorialGerontologico').click(function() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '${pageContext.request.contextPath}/verHistorialGerontologico?idPaciente='+selectedIdAnswer,
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+                                        }
+                                    });
+                                });
+                    $('.datosGerontologicos').click(function() {
+                    $.ajax({
+                        type: 'GET',
+                        url: '${pageContext.request.contextPath}/verGerontologicaC?idPaciente='+selectedIdAnswer,
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+                                        }
+                                    });
+                                });
+                    
                     $('.verResultadosF').click(function() {
                     $.ajax({
                         type: 'POST',
@@ -144,25 +176,22 @@
                         <td>${p.getApellidoMaterno()}</td>
                         <td><button type="button" class="btn btn-primary datosGenerales" onclick="setValue(${p.getId()}) ">Ver</button>
                         </td>
-                        <td>  <div class="form-group">
-                        <label for="evalGeriatricas"${p.getId()}>Historial</label>
-                        <c:set var="b" value="Paciente${p.getId()}" scope="page"></c:set>
-                        <c:set var="a" value="${b}.get().getId()"></c:set>
-                        <select class="form-control" id="evalGeriatricas"${p.getId()} name="fgSeleccionado">
-                            <option onclick="setValue(13)" value="${Paciente15.get(0).getId()}">${Paciente15.get(0).getId()}</option>
-                            <option onclick="setValue(14)">${Paciente15.get(1).getId()}</option>
-                            <option onclick="setValue(15)">${Paciente15.get(2).getId()}</option>
-                        </select>
-                        
+                        <td>  
+                            <div class="form-group">
+                        <button type="button" class="btn btn-outline-warning verHistorialGeriatrica" onclick="setValue(${p.getId()})" id="resultadosHistoria">Historial</button>
                          </div>
-                        <button type="button" class="btn btn-outline-primary verGeriatriaC" onclick="setValue(13)" id="verValoracionNID" >Ver</button>
                           <button type="button" class="btn btn-outline-success evaluacionGeriatrica" id="evaluacionGeriatricaID" onclick="setValue(${p.getId()})">Crear</button>
                         </td>
                         <td><button type="button" class="btn btn-outline-primary verResultadosF" id="resultadosFitbitID">Ver</button>
                         </td>
-                        <td><button type="button" class="btn btn-outline-primary datosGerontologicos" id="valoracionGerontologicaID" onclick="setValue(${p.getId()})">Crear</button>
+                        <td>
+                            <button type="button" class="btn btn-outline-warning verHistorialGerontologico" id="verHistorialGerontologicoID" onclick="setValue(${p.getId()})">Historial</button>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-outline-success datosGerontologicos" id="valoracionGerontologicaID" onclick="setValue(${p.getId()})">Crear</button>
+                        </div>
                         </td>
-                        <td><button type="button" class="btn btn-outline-primary datosNutricionales" id="evalNutricional" onclick="setValue(${p.getId()})">Crear</button>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary datosNutricionales" id="evalNutricional" onclick="setValue(${p.getId()})">Crear</button>
                         </td>
                         </tr>
                     </c:forEach>

@@ -118,6 +118,7 @@
                       <tr>
                         <td>Diagnóstico</td>
                         <td><input type="text" name="diagnosticoRes" value="Normal"/></td>
+                        <td><input type="text" name="diagnosticoIntr" value="Normal"/></td>
                       </tr>
                     </tbody>
                   </table>

@@ -43,3 +43,7 @@ body{
 #btnSalirID{
     margin-left: 30px;
 }
+
+#infoScreen{ overflow: scroll;
+  overflow-x: scroll;
+}

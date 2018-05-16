@@ -1,15 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0
+-- version 4.6.5.2
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2018 a las 01:32:47
--- Versión del servidor: 10.1.31-MariaDB
--- Versión de PHP: 7.2.4
+-- Tiempo de generación: 16-05-2018 a las 19:51:33
+-- Versión del servidor: 10.1.21-MariaDB
+-- Versión de PHP: 7.1.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -52,7 +50,11 @@ CREATE TABLE `formulariogeneral` (
 --
 
 INSERT INTO `formulariogeneral` (`id`, `creacion`, `lastUpdated`, `kartz`, `mental`, `barthel`, `lawtonBrody`, `escalaDepresion`, `nutricional`, `perdidaPeso`, `resistencia`, `velocidad`, `debilitamiento`, `actividad`, `diagnostico`, `paciente_id`) VALUES
-(1, '2018-05-15 05:00:00', '2018-05-15 05:00:00', '6/6', '30/30', '100/100', '8/8', '15/15', '30/30', 'Si/No', 'Normal', '1.4 m/seg', '43Kg', 'Si/No', 'Normal', 13);
+(13, '2018-05-15 05:00:00', '2018-05-15 05:00:00', '902840938', '2.43', '8932', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', 15),
+(14, '2018-05-15 05:00:00', '2018-05-15 05:00:00', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', 15),
+(15, '2018-05-15 05:00:00', '2018-05-15 05:00:00', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', 15),
+(16, '2018-05-15 05:00:00', '2018-05-15 05:00:00', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', 15),
+(17, '2018-05-15 05:00:00', '2018-05-15 05:00:00', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', '2.43', 15);
 
 -- --------------------------------------------------------
 
@@ -115,7 +117,12 @@ INSERT INTO `formularionutricion` (`id`, `creacion`, `lastUpdated`, `peso`, `int
 (3, '2018-05-15', '2018-05-15', 150, 'gordo', 210, 'bien', 50, 'Interpretación', 51, 'Bien', 152, 'Bien', 152, 'bien', 153, 'bien', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 0),
 (4, '2018-05-15', '2018-05-15', 5050, 'Interpretación', 461, 'Interpretación', 521, 'Interpretación', 80, 'Interpretación', 155, 'Interpretación', 521, 'Interpretación', 152, 'Interpretación', 111, 'Interpretación', 111, 'Interpretación', 152, 'Interpretación', 242, 'Interpretación', 0),
 (5, '2018-05-15', '2018-05-15', 50.2, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 0),
-(6, '2018-05-15', '2018-05-15', 50.2, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 13);
+(6, '2018-05-15', '2018-05-15', 50.2, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 13),
+(7, '2018-05-16', '2018-05-16', 323232, 'Interpretación2', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 15),
+(8, '2018-05-16', '2018-05-16', 93040943, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 15),
+(9, '2018-05-16', '2018-05-16', 983289042, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 15),
+(10, '2018-05-16', '2018-05-16', 39493985083, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 15),
+(11, '2018-05-16', '2018-05-16', 34903809, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 2.43, 'Interpretación', 15);
 
 -- --------------------------------------------------------
 
@@ -142,7 +149,12 @@ CREATE TABLE `formularioss` (
 --
 
 INSERT INTO `formularioss` (`id`, `creacion`, `lastUpdated`, `dispositivos`, `dispMayorUso`, `frecuencia`, `actividadesUso`, `usosFavorecer`, `apoyoSocial`, `actividadesComunitarias`, `paciente_id`) VALUES
-(1, '2018-05-15 05:00:00', '2018-05-15 05:00:00', 'Lap-top, tableta teléfono inteligente y cámara fotográfica', 'Lap-top y teléfono inteligente', 'Diario entre 1 y 3 horas', 'Búsqueda y obtención de información', 'Realización de trámites, pagos, compras y servicios (farmacia, súper, etc.)', '41 puntos ? cuenta con buenas redes de apoyo social ', 'Asistir a actividades socio-culturales fuera de su entorno primario', 13);
+(1, '2018-05-15 05:00:00', '2018-05-15 05:00:00', 'Lap-top, tableta teléfono inteligente y cámara fotográfica', 'Lap-top y teléfono inteligente', 'Diario entre 1 y 3 horas', 'Búsqueda y obtención de información', 'Realización de trámites, pagos, compras y servicios (farmacia, súper, etc.)', '41 puntos ? cuenta con buenas redes de apoyo social ', 'Asistir a actividades socio-culturales fuera de su entorno primario', 13),
+(2, '2018-05-16 05:00:00', '2018-05-16 05:00:00', 'LAP', 'Lap-top y teléfono inteligente', 'Diario entre 1 y 3 horas', 'Búsqueda y obtención de información', 'Realización de trámites, pagos, compras y servicios (farmacia, súper, etc.)', NULL, NULL, 0),
+(3, '2018-05-16 05:00:00', '2018-05-16 05:00:00', 'LAPPPP', 'Lap-top y teléfono inteligente', 'Diario entre 1 y 3 horas', 'Búsqueda y obtención de información', 'Realización de trámites, pagos, compras y servicios (farmacia, súper, etc.)', NULL, NULL, 15),
+(4, '2018-05-16 05:00:00', '2018-05-16 05:00:00', 'OPSDPODSPO', 'Lap-top y teléfono inteligente', 'Diario entre 1 y 3 horas', 'Búsqueda y obtención de información', 'Realización de trámites, pagos, compras y servicios (farmacia, súper, etc.)', '41 puntos ? cuenta con buenas redes de apoyo social ', 'Asistir a actividades socio-culturales fuera de su entorno primario', 15),
+(5, '2018-05-16 05:00:00', '2018-05-16 05:00:00', 'OPSDPODSPO', 'Lap-top y teléfono inteligente', 'Diario entre 1 y 3 horas', 'Búsqueda y obtención de información', 'Realización de trámites, pagos, compras y servicios (farmacia, súper, etc.)', '41 puntos ? cuenta con buenas redes de apoyo social ', 'Asistir a actividades socio-culturales fuera de su entorno primario', 15),
+(6, '2018-05-16 05:00:00', '2018-05-16 05:00:00', 'Lap-top, tableta teléfono inteligente y cámara fotográfica', 'Lap-top y teléfono inteligente', 'Diario entre 1 y 3 horas', 'Búsqueda y obtención de información', 'Realización de trámites, pagos, compras y servicios (farmacia, súper, etc.)', '41 puntos ? cuenta con buenas redes de apoyo social ', 'Asistir a actividades socio-culturales fuera de su entorno primario', 15);
 
 -- --------------------------------------------------------
 
@@ -174,7 +186,7 @@ CREATE TABLE `pacientes` (
   `email` varchar(50) DEFAULT NULL,
   `direccion` varchar(50) DEFAULT NULL,
   `edad` varchar(50) DEFAULT NULL,
-  `cohabitacion` tinyint(1) DEFAULT NULL,
+  `cohabitacion` tinyint(1) DEFAULT '0',
   `escolaridad` varchar(75) DEFAULT NULL,
   `afiliacion` varchar(50) DEFAULT NULL,
   `estadoCivil` varchar(50) DEFAULT NULL,
@@ -186,22 +198,18 @@ CREATE TABLE `pacientes` (
   `id_formularioSS` int(11) DEFAULT NULL,
   `id_formularioNutricion` int(11) DEFAULT NULL,
   `id_Fitbit` int(11) DEFAULT NULL,
-  `id_grafica` int(11) DEFAULT NULL
+  `id_grafica` int(11) DEFAULT NULL,
+  `idFormulariosGenerales` varchar(255) DEFAULT '0',
+  `idFormulariosSS` varchar(255) DEFAULT '0',
+  `idFormulariosNutricionales` varchar(255) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `pacientes`
 --
 
-INSERT INTO `pacientes` (`id`, `creacion`, `LastUpdated`, `telefono`, `nombre`, `apellidoPaterno`, `apellidoMaterno`, `email`, `direccion`, `edad`, `cohabitacion`, `escolaridad`, `afiliacion`, `estadoCivil`, `escalaAMAI`, `autopadecimiento`, `activo`, `id_formularioMovilidad`, `id_formularioGeneral`, `id_formularioSS`, `id_formularioNutricion`, `id_Fitbit`, `id_grafica`) VALUES
-(2, NULL, '2018-05-11', '00001', 'ad', 'a', 'a', 'a@gmail', 'aaa', '54', 1, 'a', 'a', 'Casado', 'A-', 'a', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(3, NULL, NULL, NULL, 'Juan', 'Lopez', 'Gonzalez', 'juan@mail.com', NULL, NULL, NULL, 'Preparatoria', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(5, NULL, NULL, NULL, 'Juan', 'Perez', 'Martinez', 'pepe@mail.com', NULL, NULL, NULL, 'Preparatoria', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(9, NULL, NULL, NULL, 'Enrique', 'Navarro', 'Torres', 'e.navarro@mail.com', NULL, '85', 1, 'Posgrado', NULL, 'Casado', 'B+', 'Hipertension', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, '2018-05-11', '2018-05-11', '01234567', 'Alberto', 'Juarez', 'Lopez', 'alberto@mail.com', 'Casa de Beto', '56', 0, 'Preparatoria', NULL, 'Divorciado', 'C-', 'VIH', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(11, '2018-05-11', '2018-05-11', '0000000', 'Adrian', 'Lopez', 'Tsuru', 'adrian@mail.com', 'Casa Mike', '75', 1, 'Licenciatura', 'ISSTE', 'Casado', 'A+', 'Hipertension', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(12, '2018-05-15', '2018-05-15', '548', 'a', 'a', 'a', '', 'aa', '80', 1, '1', 'a', 'Casado', 'a', 'a', 1, NULL, NULL, NULL, NULL, NULL, NULL),
-(13, '2018-05-15', '2018-05-15', '51478569', 'Ezekiel', 'Elliot', 'Cowboy', 'zeke@dallas.com', 'The Star', '23', 1, 'Licenciatura', 'IMSS', 'Soltero', 'A+', 'Nada', 1, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `pacientes` (`id`, `creacion`, `LastUpdated`, `telefono`, `nombre`, `apellidoPaterno`, `apellidoMaterno`, `email`, `direccion`, `edad`, `cohabitacion`, `escolaridad`, `afiliacion`, `estadoCivil`, `escalaAMAI`, `autopadecimiento`, `activo`, `id_formularioMovilidad`, `id_formularioGeneral`, `id_formularioSS`, `id_formularioNutricion`, `id_Fitbit`, `id_grafica`, `idFormulariosGenerales`, `idFormulariosSS`, `idFormulariosNutricionales`) VALUES
+(15, '2018-05-15', '2018-05-15', '3289498', 'Abelardo', 'Rodriguez', 'Dominguez', 'abe@gmail.com', 'Aqui', '67', 1, 'Preparatoria', 'IMSS', 'Casado', 'A+', 'Hipertension', 1, NULL, NULL, NULL, NULL, NULL, NULL, '13-14-15-16-17', '0-6', '11');
 
 -- --------------------------------------------------------
 
@@ -299,44 +307,37 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `formulariogeneral`
 --
 ALTER TABLE `formulariogeneral`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT de la tabla `formulariomovilidad`
 --
 ALTER TABLE `formulariomovilidad`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `formularionutricion`
 --
 ALTER TABLE `formularionutricion`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 --
 -- AUTO_INCREMENT de la tabla `formularioss`
 --
 ALTER TABLE `formularioss`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT de la tabla `graficas`
 --
 ALTER TABLE `graficas`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
 --
 -- AUTO_INCREMENT de la tabla `pacientes`
 --
 ALTER TABLE `pacientes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
-
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
-
 --
 -- Restricciones para tablas volcadas
 --
@@ -350,7 +351,6 @@ ALTER TABLE `pacientes`
   ADD CONSTRAINT `pacientes_ibfk_3` FOREIGN KEY (`id_formularioGeneral`) REFERENCES `formulariogeneral` (`id`),
   ADD CONSTRAINT `pacientes_ibfk_4` FOREIGN KEY (`id_formularioSS`) REFERENCES `formularioss` (`id`),
   ADD CONSTRAINT `pacientes_ibfk_5` FOREIGN KEY (`id_formularioNutricion`) REFERENCES `formularionutricion` (`id`);
-COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

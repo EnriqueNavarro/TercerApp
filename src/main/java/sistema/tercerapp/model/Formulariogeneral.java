@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package sistema.tercerapp.model;
-
+      
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;

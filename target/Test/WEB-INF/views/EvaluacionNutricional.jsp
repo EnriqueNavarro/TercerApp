@@ -18,7 +18,7 @@
                                 console.log(path);
                                 $('#path1').val(path);
                                 $('#form1').attr('action', path);
-                    });
+                    }); 
         </script>
     </head>
     <body>

@@ -79,6 +79,6 @@
             <form method="post" action="salirSinGuardar">
                 <input type="submit" value="Salir sin guardar" class="btn btn-primary top-buffer" />
             </form>
-            </body>
+            </body>  
 
             </html>

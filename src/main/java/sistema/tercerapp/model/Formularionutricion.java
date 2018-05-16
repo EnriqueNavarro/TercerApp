@@ -159,7 +159,7 @@ public class Formularionutricion implements Serializable {
     public void setCreacion(Date creacion) {
         this.creacion = creacion;
     }
-
+ 
     public Date getLastUpdated() {
         return lastUpdated;
     }

@@ -1,10 +1,10 @@
-/* 
+/*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
 package sistema.tercerapp.model;
-      
+
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -34,7 +34,6 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Formulariogeneral.findById", query = "SELECT f FROM Formulariogeneral f WHERE f.id = :id")
     , @NamedQuery(name = "Formulariogeneral.findByCreacion", query = "SELECT f FROM Formulariogeneral f WHERE f.creacion = :creacion")
     , @NamedQuery(name = "Formulariogeneral.findByLastUpdated", query = "SELECT f FROM Formulariogeneral f WHERE f.lastUpdated = :lastUpdated")
-    , @NamedQuery(name = "Formulariogeneral.findByAmai", query = "SELECT f FROM Formulariogeneral f WHERE f.amai = :amai")
     , @NamedQuery(name = "Formulariogeneral.findByKartz", query = "SELECT f FROM Formulariogeneral f WHERE f.kartz = :kartz")
     , @NamedQuery(name = "Formulariogeneral.findByMental", query = "SELECT f FROM Formulariogeneral f WHERE f.mental = :mental")
     , @NamedQuery(name = "Formulariogeneral.findByBarthel", query = "SELECT f FROM Formulariogeneral f WHERE f.barthel = :barthel")
@@ -64,9 +63,6 @@ public class Formulariogeneral implements Serializable {
     @Column(name = "lastUpdated")
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastUpdated;
-    @Size(max = 50)
-    @Column(name = "amai")
-    private String amai;
     @Size(max = 50)
     @Column(name = "kartz")
     private String kartz;
@@ -143,14 +139,6 @@ public class Formulariogeneral implements Serializable {
 
     public void setLastUpdated(Date lastUpdated) {
         this.lastUpdated = lastUpdated;
-    }
-
-    public String getAmai() {
-        return amai;
-    }
-
-    public void setAmai(String amai) {
-        this.amai = amai;
     }
 
     public String getKartz() {

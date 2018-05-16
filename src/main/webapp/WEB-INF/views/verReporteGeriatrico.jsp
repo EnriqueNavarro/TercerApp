@@ -37,7 +37,7 @@
                       </tr>
                     </thead>
                     <tbody>
-             <!--input type="hidden" value="" class="form-control" id="pacienteID" name="${FG.getKartz()}" -->
+             <input type="hidden" value="" class="form-control" id="pacienteID" name="${FG.getKartz()}" >
                       <tr>
                           <td>Fecha de evaluacion:</td>
                           <td>

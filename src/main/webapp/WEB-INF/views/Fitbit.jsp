@@ -9,6 +9,7 @@
 <html>
     <head>
         
+        
             
             
                 <div class="row centerData">
@@ -20,6 +21,7 @@
                     <input type="button" value="1m" onclick=changePeriod("1m"); id="1m" class="btn btn-primary">
                 </div>
            <script>
+               src="js/chartist.js";
                             // get the url
              var url = window.location.href;
 
@@ -27,51 +29,55 @@
              var access_token = url.split("#")[1].split("=")[1].split("&")[0];
 
              // get the userid
-             var userId = url.split("#")[1].split("=")[2].split("&")[0];
-               var period="1d";
-               var request="https://api.fitbit.com/1/user/"+userId+"/activities/heart/date/"+today+"/"+period+".json";
-               var today= new Date();
-               function getDate(){
-                    var dd = today.getDate();
-                    var mm = today.getMonth()+1; //January is 0!
-                    var yyyy = today.getFullYear();
-                    if(dd<10) {
-                        dd = '0'+dd
-                    } 
-                    if(mm<10) {
-                        mm = '0'+mm
-                    } 
-                    return today = yyyy + '-' + mm + '-' + dd;
-               }
-               function makeRequest(){
-                   request="https://api.fitbit.com/1/user/"+userId+"/activities/heart/date/today/"+period+".json";
-                   console.log(request);
-                   return request;
-               }
+                var userId = url.split("#")[1].split("=")[2].split("&")[0];
+                var period="1d";
                 function changePeriod(p){
-                    console.log(userId);
-                    getDate();
                     period=p;
                     makeRequest();
-                    return true;//window.location.href = request;
+                    return true;
                 }
-                var xhr = new XMLHttpRequest();
-                xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/heart/date/today/1w.json');
-                xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
-                xhr.onload = function() {
-                   if (xhr.status === 200) {
-                      console.log(xhr.responseText);
-                      document.write(xhr.responseText);
-                                }
-                };
-                xhr.send()
+                function makeRequest(){
+                    var xhr = new XMLHttpRequest();
+                    xhr.open('GET', 'https://api.fitbit.com/1/user/'+ userId +'/activities/steps/date/today/'+period+'.json');
+                    xhr.setRequestHeader("Authorization", 'Bearer ' + access_token);
+                    xhr.onload = function() {
+                       if (xhr.status === 200) {
+                          console.log(xhr.responseText);
+                          graphMovility(xhr.responseText);
+                          document.write(xhr.responseText);
+                                    }
+                    };                    
+                    xhr.send()
+                                        
+                }
+                function graphMovility(jsondata){
+                    jsondata=JSON.parse(jsondata)
+                    
+                    let labelsprep=[]
+                    let seriesprep=[]
+                    
+                    for (var dat in jsondata) {
+                        for (var elem in jsondata[dat]) {
+                            labelsprep.push(jsondata[dat][elem].dateTime)
+                            seriesprep.push(jsondata[dat][elem].value)
+                        }
+                    }
+                    var data ={
+                        labels: labelsprep,
+                        series:[seriesprep]
+                    };
+                    var options ={
+                        width: 800,
+                        heigh: 600
+                    };
+                    new chartist.Line('ct.-chart',data,options);
+                }
+                
+                
+                
             </script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Fitbit</title>
     </head>
-    <body>
-        <a href="">Heart rate</a>
-            
-        
-    </body>
+    
 </html>

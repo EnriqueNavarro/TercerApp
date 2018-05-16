@@ -20,13 +20,16 @@ import sistema.tercerapp.model.Pacientes;
 import sistema.tercerapp.model.Formulariogeneral;
 import sistema.tercerapp.model.Formularionutricion;
 import sistema.tercerapp.model.Formularioss;
+import sistema.tercerapp.model.Formularionutricion;
 import sistema.tercerapp.service.UsuariosService;
 import sistema.tercerapp.service.PacientesService;
 import sistema.tercerapp.service.FormulariogeneralService;
 import sistema.tercerapp.service.FormularionutricionService;
 import sistema.tercerapp.service.FormulariossService;
+import sistema.tercerapp.service.FormularionutricionService;
 
 
+ 
 /**
  *
  * @author Francisco
@@ -51,6 +54,7 @@ public class AppController {
         FormularionutricionService NService;
             
     private boolean user= false;
+        
 
     
     @RequestMapping(value = {"/"})
@@ -294,6 +298,11 @@ public class AppController {
     public String showResultadosFitbit(ModelMap model) {
         return "ResultadosFitbit";
     }
+    @RequestMapping(value = {"/fitbit"})
+    public String showFitbit(ModelMap model) {
+        //model.addAttribute("UserId", userId);
+        return "Fitbit";
+    }
     
     @RequestMapping(value = {"/EvaluacionGeriatrica"}, method = RequestMethod.GET)
     public String showEvaluacionGeriatrica(@RequestParam("idPaciente") int idPaciente,ModelMap model) {
@@ -302,6 +311,10 @@ public class AppController {
         model.addAttribute("Paciente", p);
         
         return "EvaluacionGeriatrica";
+    }
+    @RequestMapping(value = {"/EvaluacionNutricional"})
+    public String showEvaluacionNutricional(ModelMap model) {
+        return "EvaluacionNutricional";
     }
     
     
@@ -391,6 +404,10 @@ public class AppController {
         
         fg.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
         fg.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
+        fg.setPacienteId(pacienteid);
+        fg.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
+        fg.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
+        
         fgService.saveFormularioGeneral(fg);
         
         if(p.getIdFormulariosGenerales() != null){
@@ -420,18 +437,18 @@ public class AppController {
 
         }
     }
-    
     @RequestMapping(value = "/evaluacionGerontologicaSubmit", method = RequestMethod.POST)
-    public String comepleteEvaluacionGerontologicaSubmit(@RequestParam( value ="dU", required = false) String dispositivosUso, 
-            @RequestParam(value = "pacienteid", required = false) int idPaciente, 
-            @RequestParam( value ="dMU", required = false) String dispositivosMayorUso,
+            public String comepleteEvaluacionGerontologicaSubmit(@RequestParam(value="pacienteid", required=false) int Id,
+    @RequestParam( value ="dU", required = false) String dispositivosUso, @RequestParam( value ="dMU", required = false) String dispositivosMayorUso,
     @RequestParam( value="frecuenciaU") String frecuenciaUso,  @RequestParam("actU") String actividadesUso, 
-    @RequestParam("usosFav") String usosFavorecer,  @RequestParam("apoyoSocial") String apoyoSocial, @RequestParam("actComu") String actividadesComunitarias, ModelMap model) {
+    @RequestParam("usosFav") String usosFavorecer,  @RequestParam("apoyoSocial") String apoyoSocial,
+    @RequestParam("actComu") String actividadesComunitarias, ModelMap model) {
              
-        Pacientes p = pacienteService.findById(idPaciente);
+        Pacientes p = pacienteService.findById(Id);
         model.addAttribute("Paciente", p);
         
         Formularioss fss = new Formularioss();
+        
         
         if(dispositivosUso != null){
             fss.setDispositivos(dispositivosUso);
@@ -440,11 +457,11 @@ public class AppController {
             fss.setDispMayorUso(dispositivosMayorUso);
         }
         
-                if(frecuenciaUso != null){
+        if(frecuenciaUso != null){
             fss.setFrecuencia(frecuenciaUso);
         }     
                 
-                if(actividadesUso != null){
+        if(actividadesUso != null){
             fss.setActividadesUso(actividadesUso);
         }      
                 
@@ -452,22 +469,25 @@ public class AppController {
             fss.setUsosFavorecer(usosFavorecer);
         }
         if(apoyoSocial != null){
+                fss.setApoyoSocial(apoyoSocial);
         }
                 
-        fss.setPacienteId(idPaciente);
-                
+        fss.setPacienteId(Id);
+
         if(actividadesComunitarias != null){
+            fss.setActividadesComunitarias(actividadesComunitarias);
         }
-        
-        
+   
         //terminar de llenar todos los campos
-        
+        fss.setPacienteId(Id);
+
         fss.setLastUpdated(new LocalDate().toDateTimeAtStartOfDay().toDate());
         fss.setCreacion(new LocalDate().toDateTimeAtStartOfDay().toDate());
 
+        
         formulariosSSService.saveFormularioss(fss);
 
-        if(p.getIdFormulariosSS()!= null){
+         if(p.getIdFormulariosSS()!= null){
         StringBuilder sb = new StringBuilder(p.getIdFormulariosSS());
         String idFg = String.valueOf(fss.getId());
         sb.append("-"+idFg); //0 no contara
@@ -475,7 +495,7 @@ public class AppController {
    
         p.setIdFormulariosSS(idString);
         pacienteService.updatePacientes(p);
-        }if(p.getIdFormulariosSS().equals("0") || p.getIdFormulariosSS() == null){
+        }else if(p.getIdFormulariosSS().equals("0") || p.getIdFormulariosSS()== null){
         StringBuilder sb = new StringBuilder();
         String idFg = String.valueOf(fss.getId());
         sb.append(idFg);
@@ -493,6 +513,9 @@ public class AppController {
 
         }
     }
+    
+    
+    
     
     @RequestMapping(value = {"/ValoracionGerontologica"})
     public String showValoracionGerontologica(ModelMap model) {
@@ -736,4 +759,17 @@ public class AppController {
 
         }    
     }
+    
+    @RequestMapping(value = {"/salirSinGuardar"})
+    public String salirSinGuardar(ModelMap model) {
+        
+        if(user){
+                    return "usuarioDashboard";
+
+        }else{
+                    return "adminDashboard";
+
+        }
+    }
 }
+

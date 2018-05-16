@@ -22,11 +22,9 @@
         </script>
     </head>
     <body>
-        <body>
-                <form method="post" action="evaluacionNutricionalSubmit">
+            <form method="post" action="evaluacionNutricionalSubmit">
                 <div class="container ">
                     <h1 class="well">Evaluación nutricional del paciente</h1>
-                    <input type="hidden" value="${Paciente.getId()}" class="form-control" id="nombreCompletoID" name="pacienteid" >
                     <table class="table table-striped table-hover table-bordered">
                     <thead>
                       <tr>
@@ -40,6 +38,7 @@
                           <td>Peso</td>
                           <td><input type="text" name="w" value="50.2"/></td>
                           <td><input type="text" name="iw" value="Interpretación"/></td>
+        <input type="hidden" value="${Paciente.getId()}" class="form-control" id="nombreCompletoID" name="pacienteid" >
                       </tr>
                       <tr>
                           <td>Electrolitos</td>
@@ -97,5 +96,6 @@
                 <input type="submit" value="Guardar" class="btn btn-success" />
                 </form>
                 <input type="submit" onclick="location.href='/TercerApp'" value="Salir sin guardar" class="btn btn-primary top-buffer" />
+
     </body>
 </html>

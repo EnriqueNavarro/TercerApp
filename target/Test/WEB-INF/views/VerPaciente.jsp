@@ -18,7 +18,51 @@
                                 $('#path1').val(path);
                                 $('#form1').attr('action', path);
                                
-                    
+                                            
+                    $('#resultadosFitbitID').click(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '${pageContext.request.contextPath}/ResultadosFitbit',
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });
+                    $('#evaluacionNutricionalID').click(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '${pageContext.request.contextPath}/EvaluacionNutricional',
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });            
+                    $('#evaluacionGeriatricaID').click(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '${pageContext.request.contextPath}/EvaluacionGeriatrica',
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });
+                    $('#valoracionGerontologicaID').click(function() {
+                    $.ajax({
+                        type: 'POST',
+                        url: '${pageContext.request.contextPath}/ValoracionGerontologica',
+                                        success: function(result) {
+                                            $('#infoScreen').html(result);
+                                            
+
+                                        }
+                                    });
+                                });
                     });
                 </script>
             </head>
@@ -101,6 +145,7 @@
                                     </div>
                                 <input type="submit" value="Modificar" id="" class="btn btn-info">
                                 <button type="button" class="btn btn-outline-primary" id="generarReporteID">Generar Reporte</button>
+
                             </form>
                         </div>
                     </div>

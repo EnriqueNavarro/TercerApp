@@ -58,6 +58,9 @@ public class PacientesServiceImpl implements PacientesService{
            entity.setTelefono(pa.getTelefono());
            entity.setLastUpdated(pa.getLastUpdated());
            entity.setIdFormulariosGenerales(pa.getIdFormulariosGenerales());
+           entity.setIdFormulariosSS(pa.getIdFormulariosSS());
+           entity.setIdFormulariosNutricionales(pa.getIdFormulariosNutricionales());
+
         }            
     }
 

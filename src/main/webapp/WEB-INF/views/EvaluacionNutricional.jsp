@@ -28,7 +28,7 @@
                     <div class="row">
                         <div class="col-4">
                           <label>Paciente:</label>
-                            <input type="text" placeholder="id" class="form-control" id="pacienteID" name="pacienteid" >
+                            <input type="text" placeholder="id" class="form-control" id="pacienteID" name="pacienteid" required>
                         </div>
                     </div>
                     <table class="table table-striped table-hover table-bordered">

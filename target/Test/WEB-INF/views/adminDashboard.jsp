@@ -18,6 +18,8 @@
   <link rel="stylesheet" href="<c:url value='/' />css/adminHome/font-awesome.min.css" type="text/css">
   <!-- Custom styles for this template-->
   <link rel="stylesheet" href="<c:url value='/' />css/adminHome/sb-admin.css">
+  <link rel="stylesheet" href="<c:url value='/' />css/chartist.css">
+
 
 
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
